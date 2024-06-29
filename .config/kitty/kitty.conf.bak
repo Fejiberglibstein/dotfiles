@@ -1,0 +1,6 @@
+# BEGIN_KITTY_THEME
+# Dracula
+include current-theme.conf
+font_family CaskaydiaCove Nerd Font
+
+# END_KITTY_THEME

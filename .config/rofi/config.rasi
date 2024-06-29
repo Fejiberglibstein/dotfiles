@@ -1,0 +1,106 @@
+/*
+ * Reference
+ * https://github.com/lbonn/rofi/blob/wayland/doc/rofi-theme.5.markdown
+ */
+
+configuration {
+    sidebar-mode: false;
+    modes: "drun,run,ssh";
+    terminal: "kitty";
+    show-icons: true;
+    sort: true;
+
+
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+    filebrowser {
+        directories-first: true;
+        sorting-method:    "name";
+    }
+}
+
+// Overall window
+window {
+    anchor: north;
+
+    background-color: @background;
+    border-radius: 12px;
+    padding: 16px;
+    border: none;
+    width: 20%;
+    spacing: 10px;
+    children: [inputbar, listview, mode-switcher];
+}
+
+inputbar {
+    background-color: @foreground;
+    padding: 10px;
+    border: none;
+    border-radius: 9px;
+    color: white;
+    spacing: 8;
+    children: [textbox-search, entry];
+}
+
+// The bit that shows "drun"
+textbox-search {
+    expand: false;
+    markup: true;
+    vertical-align: 0.8;
+    content: "<span> </span>";
+    color: @text;
+}
+
+// Where you type in to search
+entry {
+    placeholder: "Search";
+    color: @text;
+}
+
+listview {
+    scrollbar: false;
+    border: none;
+    lines: 6;
+}
+
+// Each element in the list
+element {
+    padding: 8px;
+}
+
+element.normal.normal,
+element.alternate.normal {
+    color: white;
+    background-color: transparent;
+}
+
+element.selected.normal {
+    background-color: @selected;
+    border-radius: 9px;
+}
+
+mode-switcher {
+    border: none;
+    spacing: 10;
+}
+
+button {
+    color: white;
+    padding: 7;
+    border-radius: 8;
+    background-color: @foreground;
+}
+
+button.selected {
+    background-color: @selected;
+}
+
+textbox {
+	color: white;
+}
+
+@import "theme.rasi"
+
+/* vim:ft=css

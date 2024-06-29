@@ -1,0 +1,39 @@
+configuration {
+    show-icons: false;
+    sort: false;        
+}
+
+window {
+    children: [listview];
+    width: 115px;
+    border-radius: 40px;
+
+    location: east;
+    anchor: east;
+    x-offset: -15px;
+    margin: 0px;
+}
+
+listview {
+    height: 160px;
+    columns: 1;
+    lines: 3;
+    scrollbar: false;
+    padding: 0px;
+}
+
+element {
+    padding: 26px 0px;
+}
+
+element.selected.normal {
+    border-radius: 35px;
+}
+
+element-text {
+    font: "Font Awesome 6 Free 24";
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+@import "theme.rasi"

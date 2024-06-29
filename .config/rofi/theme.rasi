@@ -1,0 +1,9 @@
+
+* {
+    font:       "Space Grotesk, FontAwesome 6 Free 12";
+    text:       #bbbbbb;
+    background: #1c1f24;
+    foreground: #323336;
+    selected:   #705cad;
+
+}

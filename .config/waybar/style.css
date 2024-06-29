@@ -1,0 +1,181 @@
+@define-color bg-color #323347;
+
+* {
+    font-family: "Space Grotesk", "Font Awesome 6 Free";
+    font-size: 14px;
+}
+
+window {
+    background-color: transparent;
+}
+
+.modules-left, .modules-center, .modules-right {
+    background-color: @bg-color;
+    padding: 0px 8px;
+    border-radius: 9px;
+}
+
+.modules-center {
+    padding: 2px;
+}
+
+button {
+    border-radius: 100px;
+    padding: 1px 3px;
+    margin: 1px;
+
+    background-image: linear-gradient(
+        @bg-color 0%,
+        @bg-color 25%,
+        white 25%,
+        white 50%,
+        #705cad 50%,
+        #705cad 85%,
+        #352a57
+    );
+
+    background-size: 400% 400%;
+    background-position: 0% 0%;
+
+    transition: 0.4s;
+
+}
+
+button.active {
+    border-radius: 9px;
+    background-position: 100% 100%;
+}
+
+#power-profiles-daemon {
+    min-width: 25px;
+}
+
+#power-profiles-daemon.performance {
+}
+
+#power-profiles-daemon.balanced {
+}
+
+#power-profiles-daemon.power-saver {
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#disk {
+}
+
+#backlight {
+}
+
+#network {
+}
+
+#network.disconnected {
+}
+
+#pulseaudio {
+}
+
+#pulseaudio.muted {
+}
+
+#wireplumber {
+}
+
+#wireplumber.muted {
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#temperature {
+}
+
+#temperature.critical {
+}
+
+#tray {
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+}
+
+#idle_inhibitor.activated {
+}
+
+#mpd {
+}
+
+#mpd.disconnected {
+}
+
+#mpd.stopped {
+}
+
+#mpd.paused {
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+
+#privacy-item.screenshare {
+    background-color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: #0069d4;
+}
