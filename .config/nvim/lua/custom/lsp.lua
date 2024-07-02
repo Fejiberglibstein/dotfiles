@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         if client and client.server_capabilities and vim.lsp.inlay_hint then
             vim.api.nvim_buf_create_user_command(event.buf, 'ToggleInlayHints', function()
                 ---@diagnostic disable-next-line: missing-parameter
-                print("Inlay hints " .. (vim.lsp.inlay_hint.is_enabled() and 'on' or 'off'))
+                print("Inlay hints " .. (vim.lsp.inlay_hint.is_enabled() and 'off' or 'on'))
                 ---@diagnostic disable-next-line: missing-parameter
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, {})

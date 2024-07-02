@@ -22,12 +22,59 @@ vim.keymap.set('v', 'K', function()
     return ":m '<-" .. count + 1 .. "<CR>gv=gv"
 end, { expr = true, desc = "Move selected lines up when in visual mode" })
 
--- Nicer ctrl d and ctrl u
-vim.keymap.set('n', '<C-d>', "<C-d>zz");
-vim.keymap.set('n', '<C-u>', "<C-u>zz");
-
 -- When pressing J keep cursor in same spot
 vim.keymap.set('n', 'J', "mzJ`z")
 
 vim.keymap.set('n', '<leader><leader>x', "<CMD>source %<CR>", { desc = "Source file" });
 vim.keymap.set('n', '<leader>x', "<CMD>. lua<CR>", { desc = "Source file" });
+
+
+-- Make jump list nicer
+--
+-- Make j/k add a jumplist position when the count is > 8
+local function remap_jk(key)
+    vim.keymap.set('n', key, function()
+        if vim.v.count > 8 then
+            return 'm\'' .. vim.v.count .. key
+        else
+            return key
+        end
+    end, { expr = true });
+end
+
+remap_jk('j')
+remap_jk('k')
+
+-- Make it so doing ctrl-u/d will add the starting position when you initially ctrl u/d to the jump list. If you move the cursor inbetween ctrl-u/d presses, it will change the jumpoint
+local cursor_moved = false
+local function cursor_moved_fn(callback)
+    vim.api.nvim_create_autocmd('CursorMoved', {
+        group = vim.api.nvim_create_augroup('<C-d> and <C-u> fix', { clear = true }),
+        callback = callback
+    })
+end
+
+local function remap_ctrl_ud(key)
+    vim.keymap.set('n', key, function()
+        -- cursor_moved_fn's autocmd runs whenever the cursor moves. When this remap_ctrl_ud function returns,
+        cursor_moved_fn(function ()
+            cursor_moved_fn(function ()
+                cursor_moved = true
+            end)
+        end)
+        key = key .. 'zz'
+        if cursor_moved == false then
+            return key
+        else
+            cursor_moved = false
+            return 'm\'' .. key
+        end
+    end, { expr = true })
+end
+
+remap_ctrl_ud('<C-u>')
+remap_ctrl_ud('<C-d>')
+
+cursor_moved_fn(function ()
+   cursor_moved = true
+end)

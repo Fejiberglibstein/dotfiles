@@ -1,3 +1,12 @@
+function Tabs(tabs)
+    tabs = tabs or 4
+    vim.opt.shiftwidth = tabs
+    vim.opt.tabstop = tabs
+    vim.opt.expandtab = true
+end
+
+Tabs()
+
 vim.g.have_nerd_font = true
 
 vim.opt.number = true
@@ -36,5 +45,14 @@ vim.opt.scrolloff = 6
 
 vim.opt.laststatus = 3
 
-vim.opt.formatoptions:append 'c' -- Only format comments
-vim.opt.formatoptions:remove 'o' -- don't add comment when doing `o` 
+-- uyiewrgqyufgher yur2eghfvcyui3gbrvcyui3breyuvcjh1r3 vc31brfchy1vb ch1w edvhevwd v1hew weh fdhw1 efcyhl1v efc1wevb uydif v13yfv c31lbu13vcbclui31
+vim.opt.textwidth = 80
+
+vim.api.nvim_create_autocmd('TextYankPost',
+    {
+        desc = "Highlight when yanking text",
+        group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+        callback = function()
+            vim.highlight.on_yank()
+        end,
+    })

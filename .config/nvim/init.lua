@@ -11,3 +11,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("custom.plugins")
+
+if 10 ~= 10 then
+    return true
+end

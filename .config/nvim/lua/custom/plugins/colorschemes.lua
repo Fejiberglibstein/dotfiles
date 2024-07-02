@@ -1,8 +1,7 @@
 return {
-    { 
-        -- GITHUB:
-        "catppuccin/nvim", 
-        name = "catppuccin", 
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
         opts = {
             flavour = "macchiato",
@@ -16,5 +15,9 @@ return {
                 vim.cmd.colorscheme "catppuccin"
             end
         }
+    },
+    {
+        'folke/tokyonight.nvim',
+        name = 'tokyonight'
     }
 }

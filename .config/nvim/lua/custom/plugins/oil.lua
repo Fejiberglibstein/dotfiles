@@ -28,6 +28,8 @@ return {
             list = false,
             conceallevel = 3,
             concealcursor = "nvic",
+            number = false,
+            relativenumber = false
         },
         -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
         delete_to_trash = false,
@@ -182,14 +184,13 @@ return {
     },
     config = function (_, opts)
         require('oil').setup(opts)
-        vim.keymap.set('n', '<leader>ft', '<CMD>Oil<CR>', { desc = 'Open parent directory'})
+        vim.keymap.set('n', '<leader>ft', require('oil').open_float, { desc = 'Open parent directory'})
 
-        vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-            pattern = {"*.c", "*.h"},
-            callback = function(ev)
-                print(string.format('event fired: %s', vim.inspect(ev)))
-            end
-        })
+        -- vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+        --     callback = function(ev)
+        --         print(string.format('event fired: %s', vim.inspect(ev)))
+        --     end
+        -- })
 
     end
 }
