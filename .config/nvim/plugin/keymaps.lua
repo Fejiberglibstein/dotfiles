@@ -25,6 +25,11 @@ end, { expr = true, desc = "Move selected lines up when in visual mode" })
 -- When pressing J keep cursor in same spot
 vim.keymap.set('n', 'J', "mzJ`z")
 
+-- Nicer motions for deleting paragraphs
+vim.keymap.set('n', 'd{', '$d{x');
+vim.keymap.set('n', 'd}', '0d}');
+
+-- Source files
 vim.keymap.set('n', '<leader><leader>x', "<CMD>source %<CR>", { desc = "Source file" });
 vim.keymap.set('n', '<leader>x', "<CMD>. lua<CR>", { desc = "Source file" });
 

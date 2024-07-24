@@ -10,6 +10,9 @@ window {
 }
 
 .modules-left, .modules-center, .modules-right {
+    /*border-width: 3px;*/
+    /*border-style: solid;*/
+    /*border-color: rgba(112, 92, 173, 0.33);*/
     background-color: @bg-color;
     padding: 0px 8px;
     border-radius: 9px;
