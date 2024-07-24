@@ -9,10 +9,20 @@ return {
         'williamboman/mason-lspconfig.nvim',
 
         -- https://github.com/j-hui/fidget.nvim
-        { 'j-hui/fidget.nvim', opts = {} },
+        {
+            'j-hui/fidget.nvim',
+            opts = {
+                notification = {
+                    window = {
+                        -- For transparent background
+                        winblend = 0,
+                    }
+                }
+            }
+        },
 
         -- https://github.com/folke/lazydev.nvim
-        { 'folke/lazydev.nvim', opts = {}, ft = 'lua' },
+        { 'folke/lazydev.nvim',      opts = {},    ft = 'lua' },
 
     },
     config = function()

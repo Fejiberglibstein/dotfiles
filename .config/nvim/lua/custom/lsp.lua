@@ -19,11 +19,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Rename symbol under cursor
         map('<leader>rn', vim.lsp.buf.rename, 'Rename')
+        map('<leader>rr', vim.lsp.buf.references, 'References')
 
         -- Execute code action under cursor
         map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+        -- Diagnostic Keymaps
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
         -- Toggle inlay hints if it's supported
         --

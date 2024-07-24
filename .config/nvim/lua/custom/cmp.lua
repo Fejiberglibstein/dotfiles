@@ -8,10 +8,17 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end
     },
-    completion = { completeopt = 'menu,menuone,noinsert' },
+    completion = { autocomplete = { 'InsertEnter', 'TextChanged' }, completeopt = 'menu,menuone,noinsert' },
     mapping = cmp.mapping.preset.insert {
         -- Select the next item
-        ['<C-n>'] = cmp.mapping.select_next_item(),
+        -- If the completion menu isn't already open, open it.
+        ['<C-n>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                cmp.complete()
+            end
+        end, { 'i', 's' }),
         -- Select the prev item
         ['<C-p>'] = cmp.mapping.select_prev_item(),
 
@@ -28,18 +35,20 @@ cmp.setup({
                 luasnip.expand_or_jump()
             end
         end, { 'i', 's' }),
+
         -- Move backward in snippet expansion
         ['<C-h>'] = cmp.mapping(function()
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             end
         end, { 'i', 's' }),
+
         -- For more luasnip keymaps, look at
-        --  https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+        -- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
     },
     sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
+        { name = 'nvim_lsp', priority = 1 },
+        { name = 'luasnip',  priority = -2 },
+        { name = 'path',     priority = -1 },
     }
 })

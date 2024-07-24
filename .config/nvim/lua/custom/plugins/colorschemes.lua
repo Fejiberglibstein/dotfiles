@@ -13,11 +13,13 @@ return {
             },
             config = function()
                 vim.cmd.colorscheme "catppuccin"
+                vim.cmd 'highlight Normal guibg=Transparent'
             end
         }
     },
     {
         'folke/tokyonight.nvim',
-        name = 'tokyonight'
+        name = 'tokyonight',
+        lazy = true
     }
 }

@@ -1,11 +1,4 @@
-function Tabs(tabs)
-    tabs = tabs or 4
-    vim.opt.shiftwidth = tabs
-    vim.opt.tabstop = tabs
-    vim.opt.expandtab = true
-end
-
-Tabs()
+vim.opt.tabstop = 4
 
 vim.g.have_nerd_font = true
 

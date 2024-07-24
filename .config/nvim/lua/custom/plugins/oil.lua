@@ -184,13 +184,21 @@ return {
     },
     config = function (_, opts)
         require('oil').setup(opts)
-        vim.keymap.set('n', '<leader>ft', require('oil').open_float, { desc = 'Open parent directory'})
-
-        -- vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-        --     callback = function(ev)
-        --         print(string.format('event fired: %s', vim.inspect(ev)))
-        --     end
-        -- })
+        vim.keymap.set('n', '<leader>ft', function ()
+            require('oil').open_float(vim.fn.getcwd())
+            local winid = vim.api.nvim_get_current_win()
+            if vim.w[winid].is_oil_win then
+                -- Make keymap q to close window
+                vim.api.nvim_set_keymap('n', 'q', '<c-w>q', {})
+                vim.api.nvim_create_autocmd("WinClosed", {
+                    once=true,
+                    callback=function ()
+                        -- Remove the keymap when the oil window is closed
+                        vim.api.nvim_del_keymap('n', 'q')
+                    end
+                })
+           end
+        end, { desc = 'Open parent directory'})
 
     end
 }
