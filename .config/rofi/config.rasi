@@ -5,7 +5,7 @@
 
 configuration {
     sidebar-mode: false;
-    modes: "drun,run,ssh";
+    modes: "drun,run";
     terminal: "kitty";
     show-icons: true;
     sort: true;

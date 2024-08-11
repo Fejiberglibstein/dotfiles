@@ -37,3 +37,5 @@ element-text {
 }
 
 @import "theme.rasi"
+
+/* vim:ft=css

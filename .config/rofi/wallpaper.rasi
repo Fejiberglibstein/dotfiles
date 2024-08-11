@@ -1,0 +1,19 @@
+configuration {
+    show-icons: true;
+    sort: false;        
+}
+
+window {
+	children: [icon-current-entry, inputbar, listview];
+	width: 700px;
+}
+
+icon-current-entry {
+	size: 700px;
+	padding: -200px;
+	border-radius: 20px;
+}
+
+element.icon {
+	size: 2.5em;
+}
