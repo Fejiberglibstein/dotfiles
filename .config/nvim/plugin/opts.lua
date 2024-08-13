@@ -38,8 +38,9 @@ vim.opt.scrolloff = 6
 
 vim.opt.laststatus = 3
 
--- uyiewrgqyufgher yur2eghfvcyui3gbrvcyui3breyuvcjh1r3 vc31brfchy1vb ch1w edvhevwd v1hew weh fdhw1 efcyhl1v efc1wevb uydif v13yfv c31lbu13vcbclui31
 vim.opt.textwidth = 80
+
+vim.opt.formatoptions:append("ron")
 
 vim.api.nvim_create_autocmd('TextYankPost',
     {
