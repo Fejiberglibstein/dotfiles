@@ -8,11 +8,14 @@ return {
             -- Only one of these is needed, not both.
             "nvim-telescope/telescope.nvim", -- optional
         },
-        cmd = "Neogit",
         opts = {
             graph_style = "unicode"
 
-        }
+        },
+        config = function (opts)
+            require('neogit').setup(opts)
+            vim.keymap.set('n', '<leader>n', vim.cmd.Neogit, { desc = "Neogit"});
+        end
     },
     {
         'lewis6991/gitsigns.nvim',
