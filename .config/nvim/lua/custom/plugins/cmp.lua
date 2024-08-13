@@ -10,6 +10,7 @@ return {
         'saadparwaiz1/cmp_luasnip', -- https://github.com/saadparwaiz1/cmp_luasnip
         'hrsh7th/cmp-nvim-lsp',     -- https://github.com/hrsh7th/cmp-nvim-lsp
         'hrsh7th/cmp-path',         -- https://github.com/hrsh7th/cmp-path
+        'onsails/lspkind.nvim',     -- https://github.com/onsails/lspkind.nvim
         'nvim-telescope/telescope.nvim',
     },
     config = function()
