@@ -22,7 +22,19 @@ return {
         },
 
         -- https://github.com/folke/lazydev.nvim
-        { 'folke/lazydev.nvim',      opts = {},    ft = 'lua' },
+        {
+            'folke/lazydev.nvim',
+            opts = {
+                library = {
+                    -- See the configuration section for more details
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = "luvit-meta/library", words = { "vim%.uv" } },
+                },
+            },
+            ft = 'lua',
+            -- https://github.com/Bilal2453/luvit-meta
+            dependencies = { "Bilal2453/luvit-meta", lazy = true } -- Bindings for vim.uv
+        },
 
     },
     config = function()
