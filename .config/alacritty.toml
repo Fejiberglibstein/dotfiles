@@ -9,7 +9,7 @@ style = "Regular"
 term = "xterm-256color"
 
 [window]
-opacity = 0.9
+opacity = 0.85
 
 # Default colors
 [colors.primary]
