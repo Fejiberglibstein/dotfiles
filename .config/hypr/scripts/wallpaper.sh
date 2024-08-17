@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 result=$(fd . ~/wallpapers/ |
-	xargs -I {} echo -en "{}\0icon\x1f{}\n" |
+	xargs -I {} echo -en "{}\0icon\x1f{}\n" | 
+	shuf |
 	rofi -dmenu \
 	-theme-str '@import "wallpaper.rasi"' \
 )
