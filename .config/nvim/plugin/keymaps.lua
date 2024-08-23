@@ -33,10 +33,6 @@ vim.keymap.set('n', 'S', '"_S');
 vim.keymap.set('o', '{', 'V{', { nowait = true });
 vim.keymap.set('o', '}', 'V}', { nowait = true });
 
--- Source files
-vim.keymap.set('n', '<leader><leader>x', "<CMD>source %<CR>", { desc = "Source file" });
-vim.keymap.set('n', '<leader>x', "<CMD>. lua<CR>", { desc = "Source file" });
-
 -- Make jump list nicer
 --
 -- Make j/k add a jumplist position when the count is > 8
