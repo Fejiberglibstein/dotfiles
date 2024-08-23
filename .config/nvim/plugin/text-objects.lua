@@ -86,12 +86,13 @@ local function select_comment(around)
 
     local startline = vim.fn.line('.');
     local endline = vim.fn.line('.');
+    local lastLine = vim.fn.line('$');
 
-    while line_has_comment(startline) or (around and is_line_blank(startline)) do
+    while startline > 0 and (line_has_comment(startline) or (around and is_line_blank(startline))) do
         startline = startline - 1;
     end
 
-    while line_has_comment(endline) or (around and is_line_blank(endline)) do
+    while endline < lastLine and (line_has_comment(endline) or (around and is_line_blank(endline))) do
         endline = endline + 1;
     end
 
