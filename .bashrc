@@ -27,18 +27,25 @@ eval "$(zoxide init bash)"
 
 # Disable tmux when sshing 
 function ssh() {
-	if [ -n "${TMUX}" ]; then
-		tmux set status off
-		tmux set prefix None
-	fi
+    if [ -n "${TMUX}" ]; then
+	tmux set status off
+	tmux set prefix None
+    fi
 
-	# https://unix.stackexchange.com/questions/454553/bash-shadow-a-command-function-with-same-name-as-command
-	command ssh "$@"
+    # https://unix.stackexchange.com/questions/454553/bash-shadow-a-command-function-with-same-name-as-command
+    command ssh "$@"
 
-	if [ -n "${TMUX}" ]; then
-		tmux set status on
-		tmux set prefix C-s
-	fi
+    if [ -n "${TMUX}" ]; then
+	tmux set status on
+	tmux set prefix C-s
+    fi
+}
+
+function nmtui() {
+    c="$COLORTERM"
+    unset COLORTERM
+    TERM=xterm-old command nmtui
+    set COLORTERM "$c"
 }
 
 PS1='[\u@\h \W]\$ '
