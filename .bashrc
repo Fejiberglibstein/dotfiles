@@ -18,12 +18,28 @@ export PATH=$GOPATH/bin:$PATH
 
 # TERM="tmux-256color"
 alias ls='ls --color=auto'
-alias grep='grep --color=auto'
+alias grep='rg --color=auto'
 alias cat="bat"
 
 # Zoxide
 alias cd="z"
 eval "$(zoxide init bash)"
+
+# Disable tmux when sshing 
+function ssh() {
+	if [ -n "${TMUX}" ]; then
+		tmux set status off
+		tmux set prefix None
+	fi
+
+	# https://unix.stackexchange.com/questions/454553/bash-shadow-a-command-function-with-same-name-as-command
+	command ssh "$@"
+
+	if [ -n "${TMUX}" ]; then
+		tmux set status on
+		tmux set prefix C-s
+	fi
+}
 
 PS1='[\u@\h \W]\$ '
 
