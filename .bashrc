@@ -42,6 +42,7 @@ function ssh() {
 }
 
 function nmtui() {
+    nmcli device wifi rescan
     c="$COLORTERM"
     unset COLORTERM
     TERM=xterm-old command nmtui
