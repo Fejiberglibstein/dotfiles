@@ -2,17 +2,17 @@
 ;; Clock
 (defvar time_reveal false)
 (defvar bright_reveal false)
-(deflisten bright_perc :initial 100 `./bar/scripts/poll "brightnessctl -m | awk -F, '{printf \\$4 }' | sed 's/%//g'"`)
+(deflisten bright_perc :initial 100 `./bar/scripts/poll.sh "brightnessctl -m | awk -F, '{printf \\$4 }' | sed 's/%//g'"`)
 (defvar sound_reveal false)
-(deflisten sound_perc :initial 100 `./bar/scripts/poll "awk -F'[][]' '/Left:/ { print \\$2 }' <(amixer sget Master) | sed 's/%//g'"`)
+(deflisten sound_perc :initial 100 `./bar/scripts/poll.sh "awk -F'[][]' '/Left:/ { print \\$2 }' <(amixer sget Master) | sed 's/%//g'"`)
 
 (deflisten workspaces 
     :initial '[{"id":"1","windows":1}]'
-    `./bar/scripts/poll "./bar/scripts/workspaces.sh all"`
+    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh all"`
     )
 (deflisten active_workspace
     :initial "1"
-    `./bar/scripts/poll "./bar/scripts/workspaces.sh active"`
+    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh active"`
     )
 
 (defwidget bbox []
