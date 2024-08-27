@@ -12,6 +12,8 @@ export PATH=$BUN_INSTALL/bin:$PATH
 export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$PATH
 
+alias locker='~/.config/hypr/scripts/lock_screen.sh'
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

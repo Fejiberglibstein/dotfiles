@@ -14,7 +14,8 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
 return {
     {
         "elkowar/yuck.vim",
-        ft = "yuck"
+        ft = "yuck",
+        dependencies = { 'gpanders/nvim-parinfer'}
     },
 
 }
