@@ -1,0 +1,96 @@
+* {
+  all: unset;
+}
+
+tooltip.background {
+  font-size: 14;
+  border-radius: 10px;
+  background-color: rgba(#181926, 0.95);
+  color: #b8c0e0;
+}
+
+tooltip label {
+  margin: 3px;
+}
+
+.bar {
+  background: rgb(0, 0, 0, 0);
+  all: unset;
+  font-family: "Space Grotesk", "Font Awesome 6 Free";
+}
+
+.start_mod,
+.center_mod,
+.end_mod {
+  padding: 0px 10px;
+}
+
+.bar_mod {
+  background: rgba(#1e2030, 0.9);
+  border-radius: 10px;
+  margin: 0px 5px;
+  // border: 1px solid #c6a0f6;
+}
+
+.clock .time label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.clock {
+  font-family: "inter";
+  font-size: 12;
+  color: #cad3f5;
+}
+
+.sep {
+  color: #494d64;
+  font-family: "inter";
+  font-weight: 700;
+}
+
+scale trough {
+  all: unset;
+  background-color: #494d64;
+  border-radius: 16px;
+  min-height: 8px;
+  min-width: 70px;
+  margin: 0px 10px 0px 0px;
+}
+
+@keyframes Charging {
+  from {
+    color: #cad3f5;
+  }
+
+  to {
+    color: #a6da95;
+  }
+}
+
+.battery.Charging {
+  animation: Charging 2s infinite;
+  animation-direction: alternate-reverse;
+}
+
+.workspace {
+  padding: 5px;
+  background-color: #939ab7;
+  border-radius: 10px;
+  transition-duration: 200ms;
+}
+
+.workspace.empty {
+  background-color: #5b6078;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.workspace.empty.current {
+  background-color: #6e738d;
+}
+
+.workspace.current {
+  padding: 4px 11px;
+  background-color: #cad3f5;
+}

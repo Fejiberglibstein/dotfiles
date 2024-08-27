@@ -1,0 +1,188 @@
+
+;; Clock
+(defvar time_reveal false)
+(defvar bright_reveal false)
+(deflisten bright_perc :initial 100 `./bar/scripts/poll "brightnessctl -m | awk -F, '{printf \\$4 }' | sed 's/%//g'"`)
+(defvar sound_reveal false)
+(deflisten sound_perc :initial 100 `./bar/scripts/poll "awk -F'[][]' '/Left:/ { print \\$2 }' <(amixer sget Master) | sed 's/%//g'"`)
+
+(deflisten workspaces 
+    :initial '[{"id":"1","windows":1}]'
+    `./bar/scripts/poll "./bar/scripts/workspaces.sh all"`
+    )
+(deflisten active_workspace
+    :initial "1"
+    `./bar/scripts/poll "./bar/scripts/workspaces.sh active"`
+    )
+
+(defwidget bbox []
+    (centerbox
+        :orientation "v"
+        (box)
+        (box (children))
+        (box)))
+
+(defwidget slider [reveal percentage reveal_name command icon color tooltip]
+    (eventbox
+        :onhover "${EWW_CMD} update ${reveal_name}=true"
+        :onhoverlost "${EWW_CMD} update ${reveal_name}=false"
+        (box
+            :space-evenly false
+            (revealer
+                :reveal "${reveal}"
+                :transition "slideright"
+                :duration 200
+                (scale
+                    :css "trough highlight {background-color: ${color}; border-radius: 26px;}"
+                    :flipped true
+                    :min {matches(reveal_name, "bright") ? 1 : 0}
+                    :max 101
+                    :width 125
+                    :onchange command
+                    :value percentage))
+            (overlay
+                :tooltip {replace(tooltip, 'VAL', percentage)}
+                (box
+                    :width 23
+                    (circular-progress
+                        :style "color: rgba(${color}, ${percentage / 150})"
+                        :thickness 3
+                        :value percentage))
+                        
+                (label 
+                    :text icon 
+                    :style "color: ${color}; font-size: 12px;"
+                    :class "icon"
+                    )))))
+            
+(defwidget content [side]
+    (box
+        :class "${side}_mod"
+        :space-evenly false
+        :halign side
+        :orientation "h"
+        :spacing 10
+        (children)))
+    
+
+(defwidget time []
+    (eventbox
+        :onhover "${EWW_CMD} update time_reveal=true"
+        :onhoverlost "${EWW_CMD} update time_reveal=false"
+        (box
+            :space-evenly false
+            :class "clock"
+            (box
+                :halign "center"
+                :class "time"
+                :space-evenly false
+                (label :text "${formattime(EWW_TIME, '%I:%M')}"))
+                
+            (revealer
+                :reveal time_reveal
+                :transition "slideright"
+                :duration 100
+                (box
+                    :spacing 5
+                    :class "date"
+                    :space-evenly false
+                    (label) ;; to align things properly
+                    (label :text "-")
+                    (label :text "${formattime(EWW_TIME, '%b %e')}"))))))
+                    
+(defwidget battery []
+    (box
+        :tooltip "Battery: ${EWW_BATTERY["BAT1"]["capacity"]}%"
+        :class "battery ${EWW_BATTERY["BAT1"]["status"]}"
+        :style {EWW_BATTERY["BAT1"]["status"] == "Discharging" ? "color: mix(#a6da95, #940000, ${EWW_BATTERY["BAT1"]["capacity"]})" : ""}
+        :width 20
+        (overlay
+            (circular-progress 
+                :thickness 3
+                :value {EWW_BATTERY["BAT1"]["capacity"]})
+                
+            (label
+                :text "•"
+                :yalign 0.4))))
+
+(defwidget workspaces []
+    ; centerbox is a hack so we can make the boxes look like dots, otherwise
+    ; they take up the entire height of the bar
+        (box
+            :halign "baseline"
+            :spacing 6
+            :space-evenly false
+            (for workspace in workspaces
+                 (bbox
+                     (box
+                         :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}"
+                         )))
+            )
+    )
+
+(defwidget brightness []
+    (slider
+        :reveal bright_reveal
+        :reveal_name "bright_reveal"
+        :percentage bright_perc
+
+        :command "brightnessctl set {}%"
+
+        :icon ""
+        :color "#eed49f"
+        :tooltip "Brightness: VAL%"))
+        
+(defwidget sound []
+    (slider
+        :reveal sound_reveal
+        :reveal_name "sound_reveal"
+        :percentage sound_perc
+
+        :command "amixer set Master {}%"
+
+        :icon ""
+        :color "#8bd5ca"
+        :tooltip "Sound: VAL%"))
+        
+(defwidget left []
+    (content 
+        :side "start"
+        ))
+             
+
+(defwidget middle []
+    (content :side "center"
+        (workspaces)
+    ))
+
+(defwidget right []
+    (content :side "end"
+             (brightness)
+             (sound)
+             (label :text "/" :class "sep")
+             (battery)
+             (label :text "/" :class "sep")
+             (time)))
+             
+
+(defwidget bar_mod []
+    (box
+        :class "bar_mod"
+        :orientation "h"
+        (left)
+        (middle)
+        (right)))
+
+(defwindow bar
+    :monitor 0
+    :geometry (geometry
+                  :x "0"
+                  :y "5"
+                  :width "100%"
+                  :height "32px"
+                  :anchor "top center")
+    :stacking "fg"
+    :exclusive true
+    :focusable false
+
+    (bar_mod))
