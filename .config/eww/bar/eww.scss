@@ -2,11 +2,38 @@
   all: unset;
 }
 
+$rosewater:		#f4dbd6;
+$flamingo:		#f0c6c6;
+$pink:			#f5bde6;
+$mauve:			#c6a0f6;
+$red:			#ed8796;
+$maroon:		#ee99a0;
+$peach:			#f5a97f;
+$yellow:		#eed49f;
+$green:			#a6da95;
+$teal:			#8bd5ca;
+$sky:			#91d7e3;
+$sapphire:		#7dc4e4;
+$blue:			#8aadf4;
+$lavender:		#b7bdf8;
+$text:			#cad3f5;
+$subtext1:		#b8c0e0;
+$subtext0:		#a5adcb;
+$overlay2:		#939ab7;
+$overlay1:		#8087a2;
+$overlay0:		#6e738d;
+$surface2:		#5b6078;
+$surface1:		#494d64;
+$surface0:		#363a4f;
+$base:			#24273a;
+$mantle:		#1e2030;
+$crust:			#181926;
+
 tooltip.background {
   font-size: 14;
   border-radius: 10px;
-  background-color: rgba(#181926, 0.95);
-  color: #b8c0e0;
+  background-color: rgba($crust, 0.95);
+  color: $subtext1;
 }
 
 tooltip label {
@@ -26,10 +53,10 @@ tooltip label {
 }
 
 .bar_mod {
-  background: rgba(#1e2030, 0.9);
+  background: rgba($mantle, 0.9);
   border-radius: 10px;
   margin: 0px 5px;
-  // border: 1px solid #c6a0f6;
+  // border: 1px solid $mauve;
 }
 
 .clock .time label {
@@ -40,31 +67,42 @@ tooltip label {
 .clock {
   font-family: "inter";
   font-size: 12;
-  color: #cad3f5;
+  color: $text;
 }
 
 .sep {
-  color: #494d64;
+  color: $surface1;
   font-family: "inter";
   font-weight: 700;
 }
 
 scale trough {
   all: unset;
-  background-color: #494d64;
+  background-color: $surface1;
   border-radius: 16px;
   min-height: 8px;
-  min-width: 70px;
   margin: 0px 10px 0px 0px;
+}
+
+.overlay-scale trough {
+  min-width: 20px;
+  border-radius: 7px;
+  background-color: rgba(0,0,0,0);
+  margin: 0px;
+}
+
+.overlay-scale trough highlight {
+  background-color: $surface1;
+  border-radius: 7px;
 }
 
 @keyframes Charging {
   from {
-    color: #cad3f5;
+    color: $text;
   }
 
   to {
-    color: #a6da95;
+    color: $green;
   }
 }
 
@@ -75,22 +113,22 @@ scale trough {
 
 .workspace {
   padding: 5px;
-  background-color: #939ab7;
+  background-color: $overlay2;
   border-radius: 10px;
   transition-duration: 200ms;
 }
 
 .workspace.empty {
-  background-color: #5b6078;
+  background-color: $surface2;
   padding: 4px;
   border-radius: 3px;
 }
 
 .workspace.empty.current {
-  background-color: #6e738d;
+  background-color: $overlay0;
 }
 
 .workspace.current {
   padding: 4px 11px;
-  background-color: #cad3f5;
+  background-color: $text;
 }

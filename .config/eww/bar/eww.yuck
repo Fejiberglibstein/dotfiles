@@ -2,25 +2,25 @@
 ;; Clock
 (defvar time_reveal false)
 (defvar bright_reveal false)
-(deflisten bright_perc :initial 100 `./bar/scripts/poll.sh "brightnessctl -m | awk -F, '{printf \\$4 }' | sed 's/%//g'"`)
+(defpoll bright_perc :interval "1s" "brightnessctl -m | awk -F, '{printf \$4 }' | sed 's/%//g'")
 (defvar sound_reveal false)
-(deflisten sound_perc :initial 100 `./bar/scripts/poll.sh "awk -F'[][]' '/Left:/ { print \\$2 }' <(amixer sget Master) | sed 's/%//g'"`)
+(defpoll sound_perc :interval "1s" "awk -F'[][]' '/Left:/ { print \$2 }' <(amixer sget Master) | sed 's/%//g'")
 
 (deflisten workspaces 
     :initial '[{"id":"1","windows":1}]'
-    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh all"`
-    )
+    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh all"`)
+    
 (deflisten active_workspace
     :initial "1"
-    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh active"`
-    )
+    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh active"`)
+    
 
 (defwidget bbox []
-    (centerbox
-        :orientation "v"
-        (box)
-        (box (children))
-        (box)))
+ (centerbox
+     :orientation "v"
+     (box)
+     (box (children))
+     (box)))
 
 (defwidget slider [reveal percentage reveal_name command icon color tooltip]
     (eventbox
@@ -42,18 +42,20 @@
                     :value percentage))
             (overlay
                 :tooltip {replace(tooltip, 'VAL', percentage)}
-                (box
-                    :width 23
-                    (circular-progress
-                        :style "color: rgba(${color}, ${percentage / 150})"
-                        :thickness 3
+                (bbox
+                    (scale
+                        :orientation "vertical"
+                        :width 23
+                        :height 20
+                        :flipped true
+                        :class "overlay-scale"
                         :value percentage))
                         
                 (label 
                     :text icon 
                     :style "color: ${color}; font-size: 12px;"
-                    :class "icon"
-                    )))))
+                    :class "icon")))))
+                    
             
 (defwidget content [side]
     (box
@@ -114,11 +116,10 @@
             :space-evenly false
             (for workspace in workspaces
                  (bbox
-                     (box
-                         :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}"
-                         )))
-            )
-    )
+                     (box :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}")))))
+                         
+            
+    
 
 (defwidget brightness []
     (slider
@@ -147,13 +148,16 @@
 (defwidget left []
     (content 
         :side "start"
-        ))
+        (label :text bright_perc)))
+
+    
+        
              
 
 (defwidget middle []
     (content :side "center"
-        (workspaces)
-    ))
+        (workspaces)))
+    
 
 (defwidget right []
     (content :side "end"
@@ -176,11 +180,11 @@
 (defwindow bar
     :monitor 0
     :geometry (geometry
-                  :x "0"
-                  :y "5"
-                  :width "100%"
-                  :height "32px"
-                  :anchor "top center")
+               :x "0"
+               :y "5"
+               :width "100%"
+               :height "32px"
+               :anchor "top center")
     :stacking "fg"
     :exclusive true
     :focusable false
