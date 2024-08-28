@@ -1,0 +1,5 @@
+include theme
+# include light
+
+set default-bg rgba(0,0,0,1)
+
