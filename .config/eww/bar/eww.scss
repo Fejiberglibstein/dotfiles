@@ -55,7 +55,7 @@ tooltip label {
 .bar_mod {
   background: rgba($mantle, 0.9);
   border-radius: 10px;
-  margin: 0px 5px;
+  margin: 5px 5px 0px 5px;
   // border: 1px solid $mauve;
 }
 
@@ -85,8 +85,8 @@ scale trough {
 }
 
 .overlay-scale trough {
-  min-width: 20px;
-  border-radius: 7px;
+  min-width: 25px;
+  border-radius: 0px;
   background-color: rgba(0,0,0,0);
   margin: 0px;
 }
@@ -115,7 +115,7 @@ scale trough {
   padding: 5px;
   background-color: $overlay2;
   border-radius: 10px;
-  transition-duration: 200ms;
+  transition-duration: 100ms;
 }
 
 .workspace.empty {
