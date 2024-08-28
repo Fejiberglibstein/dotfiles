@@ -1,6 +1,10 @@
 local cmp = require('cmp');
 local luasnip = require('luasnip');
-luasnip.config.setup({})
+luasnip.config.setup({
+    enable_autosnippets = true,
+})
+
+require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/luasnip/" } })
 
 local function cmp_picker(opts)
     opts = opts or {};
@@ -140,6 +144,11 @@ cmp.setup({
                 luasnip.jump(-1)
             end
         end, { 'i', 's' }),
+
+        -- Cycle through choice nodes
+        ['<C-f>'] = cmp.mapping(function()
+            luasnip.select_choice()
+        end, { 'i', 's' })
 
         -- For more luasnip keymaps, look at
         -- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
