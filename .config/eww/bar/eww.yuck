@@ -3,8 +3,8 @@
         :class "bar_mod"
         :orientation "h"
         (content 
-            :side "start"
-            (label :text bright_perc))
+            :side "start")
+
         (content :side "center"
                  (workspaces))
         (content :side "end"
@@ -12,16 +12,20 @@
                  (sound)
                  (label :text "/" :class "sep")
                  (battery)
+                 (overlay
+                     :tooltip "Cpu: ${round(EWW_CPU.avg, 1)}%, Disk: ${round(EWW_DISK["/"].used_perc, 1)}%"
+                     (cpu)
+                     (ram))
                  (label :text "/" :class "sep")
                  (time))))
 
 (defwindow bar
     :monitor 0
     :geometry (geometry
-               :x "0"
-               :width "100%"
-               :height "37px"
-               :anchor "top center")
+                  :x "0"
+                  :width "100%"
+                  :height "37px"
+                  :anchor "top center")
     :stacking "fg"
     :exclusive true
     :focusable false
@@ -38,18 +42,18 @@
 (deflisten workspaces 
     :initial '[{"id":"1","windows":1}]'
     `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh all"`)
-    
+
 (deflisten active_workspace
     :initial "1"
     `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh active"`)
-    
+
 
 (defwidget bbox [orientation]
- (centerbox
-     :orientation orientation
-     (box)
-     (box (children))
-     (box)))
+    (centerbox
+        :orientation orientation
+        (box)
+        (box (children))
+        (box)))
 
 (defwidget cbox []
     (centerbox
@@ -61,7 +65,17 @@
             (box (children))
             (box))
         (box)))
-        
+
+(defwidget circle [?color value ?reverse]
+    (overlay
+        (circular-progress 
+            :style {color != "" ? "color: ${color}" : ""}
+            :width 20
+            :clockwise {!reverse}
+            :thickness 3
+            :value value
+            (cbox (box :class "dot" :style {color != "" ? "background-color: ${color}" : ""})))))
+
 
 (defwidget slider [reveal percentage reveal_name command icon color tooltip]
     (eventbox
@@ -84,19 +98,18 @@
             (overlay
                 :tooltip {replace(tooltip, 'VAL', percentage)}
                 (bbox :orientation "v"
-                    (scale
-                        :orientation "vertical"
-                        :height 25
-                        :flipped true
-                        :class "overlay-scale"
-                        :value percentage))
-                        
+                      (scale
+                          :orientation "vertical"
+                          :height 25
+                          :flipped true
+                          :class "overlay-scale"
+                          :value percentage))
+
                 (label 
                     :text icon 
                     :style "color: ${color}; font-size: 12px;"
                     :class "icon")))))
-                    
-            
+
 (defwidget content [side]
     (box
         :class "${side}_mod"
@@ -105,7 +118,6 @@
         :orientation "h"
         :spacing 10
         (children)))
-    
 
 (defwidget time []
     (eventbox
@@ -119,7 +131,6 @@
                 :class "time"
                 :space-evenly false
                 (label :text "${formattime(EWW_TIME, '%I:%M')}"))
-                
             (revealer
                 :reveal time_reveal
                 :transition "slideright"
@@ -131,36 +142,34 @@
                     (label) ;; to align things properly
                     (label :text "-")
                     (label :text "${formattime(EWW_TIME, '%b %e')}"))))))
-                    
+
 (defwidget battery []
     (box
         :tooltip "Battery: ${EWW_BATTERY["BAT1"]["capacity"]}%"
         :class "battery ${EWW_BATTERY["BAT1"]["status"]}"
-        :style {EWW_BATTERY["BAT1"]["status"] == "Discharging" ? "color: mix(#a6da95, #940000, ${EWW_BATTERY["BAT1"]["capacity"]})" : ""}
-        (overlay
-            (circular-progress :width 20
-                :thickness 3
-                :value {EWW_BATTERY["BAT1"]["capacity"]})
-                
-            (cbox 
-                (box 
-                    :class "dot"
-                    :style {EWW_BATTERY["BAT1"]["status"] == "Discharging" ? "background-color: mix(#a6da95, #940000, ${EWW_BATTERY["BAT1"]["capacity"]})" : ""})))))
-                    
+        (circle
+            :color {EWW_BATTERY["BAT1"]["status"] == "Discharging" ? "mix(#a6da95, #940000, ${EWW_BATTERY["BAT1"]["capacity"]})" : ""}
+            :value {EWW_BATTERY["BAT1"]["capacity"]})))
+
+(defwidget cpu []
+    (circle
+        :color "#b7bdf8"
+        :value {EWW_CPU.avg}))
+
+(defwidget ram []
+    (circle
+        :color "#f5a97f"
+        :reverse true
+        :value {EWW_RAM.used_mem_perc}))
 
 (defwidget workspaces []
-    ; centerbox is a hack so we can make the boxes look like dots, otherwise
-    ; they take up the entire height of the bar
-        (box
-            :halign "baseline"
-            :spacing 6
-            :space-evenly false
-            (for workspace in workspaces
-                 (bbox :orientation "v"
-                     (box :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}")))))
-                         
-            
-    
+    (box
+        :halign "baseline"
+        :spacing 6
+        :space-evenly false
+        (for workspace in workspaces
+             (bbox :orientation "v"
+                   (box :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}")))))
 
 (defwidget brightness []
     (slider
@@ -173,16 +182,16 @@
         :icon ""
         :color "#eed49f"
         :tooltip "Brightness: VAL%"))
-        
+
 (defwidget sound []
     (slider
         :reveal sound_reveal
         :reveal_name "sound_reveal"
         :percentage sound_perc
 
-        :command "amixer set Master {}%"
+        :command "pactl set-sink-volume @DEFAULT_SINK@ {}%"
 
         :icon ""
         :color "#8bd5ca"
         :tooltip "Sound: VAL%"))
-        
+

@@ -53,9 +53,9 @@ tooltip label {
 }
 
 .bar_mod {
-  background: rgba($mantle, 0.9);
+  background: rgba($base, 0.9);
   border-radius: 10px;
-  margin: 5px 5px 0px 5px;
+  margin: 3px 2px 0px 2px;
   // border: 1px solid $mauve;
 }
 
@@ -116,7 +116,7 @@ scale trough {
   animation-direction: alternate-reverse;
 }
 
-.battery .dot {
+.dot {
   padding: 3px;
   border-radius: 4px;
 }
