@@ -61,7 +61,7 @@ tooltip label {
 
 .clock .time label {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .clock {
@@ -97,18 +97,28 @@ scale trough {
 }
 
 @keyframes Charging {
-  from {
-    color: $text;
-  }
-
-  to {
-    color: $green;
-  }
+  from { color: $text; }
+  to { color: $green; }
 }
 
 .battery.Charging {
   animation: Charging 2s infinite;
   animation-direction: alternate-reverse;
+}
+
+@keyframes BGCharging {
+  from { background-color: $text; }
+  to { background-color: $green; }
+}
+
+.battery.Charging .dot {
+  animation: BGCharging 2s infinite;
+  animation-direction: alternate-reverse;
+}
+
+.battery .dot {
+  padding: 3px;
+  border-radius: 4px;
 }
 
 .workspace {

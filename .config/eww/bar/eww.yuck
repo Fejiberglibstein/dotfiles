@@ -31,9 +31,9 @@
 ;; Clock
 (defvar time_reveal false)
 (defvar bright_reveal false)
-(defpoll bright_perc :interval "1s" "brightnessctl -m | awk -F, '{printf \$4 }' | sed 's/%//g'")
+(deflisten bright_perc :initial "100" "./bar/scripts/brightness.sh")
 (defvar sound_reveal false)
-(defpoll sound_perc :interval "1s" "awk -F'[][]' '/Left:/ { print \$2 }' <(amixer sget Master) | sed 's/%//g'")
+(deflisten sound_perc :initial "100" "./bar/scripts/volume.sh")
 
 (deflisten workspaces 
     :initial '[{"id":"1","windows":1}]'
@@ -44,12 +44,24 @@
     `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh active"`)
     
 
-(defwidget bbox []
+(defwidget bbox [orientation]
  (centerbox
-     :orientation "v"
+     :orientation orientation
      (box)
      (box (children))
      (box)))
+
+(defwidget cbox []
+    (centerbox
+        :orientation "h"
+        (box)
+        (centerbox
+            :orientation "v"
+            (box)
+            (box (children))
+            (box))
+        (box)))
+        
 
 (defwidget slider [reveal percentage reveal_name command icon color tooltip]
     (eventbox
@@ -71,7 +83,7 @@
                     :value percentage))
             (overlay
                 :tooltip {replace(tooltip, 'VAL', percentage)}
-                (bbox
+                (bbox :orientation "v"
                     (scale
                         :orientation "vertical"
                         :height 25
@@ -125,15 +137,16 @@
         :tooltip "Battery: ${EWW_BATTERY["BAT1"]["capacity"]}%"
         :class "battery ${EWW_BATTERY["BAT1"]["status"]}"
         :style {EWW_BATTERY["BAT1"]["status"] == "Discharging" ? "color: mix(#a6da95, #940000, ${EWW_BATTERY["BAT1"]["capacity"]})" : ""}
-        :width 20
         (overlay
-            (circular-progress 
+            (circular-progress :width 20
                 :thickness 3
                 :value {EWW_BATTERY["BAT1"]["capacity"]})
                 
-            (label
-                :text "•"
-                :yalign 0.4))))
+            (cbox 
+                (box 
+                    :class "dot"
+                    :style {EWW_BATTERY["BAT1"]["status"] == "Discharging" ? "background-color: mix(#a6da95, #940000, ${EWW_BATTERY["BAT1"]["capacity"]})" : ""})))))
+                    
 
 (defwidget workspaces []
     ; centerbox is a hack so we can make the boxes look like dots, otherwise
@@ -143,7 +156,7 @@
             :spacing 6
             :space-evenly false
             (for workspace in workspaces
-                 (bbox
+                 (bbox :orientation "v"
                      (box :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}")))))
                          
             
