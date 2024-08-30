@@ -13,7 +13,7 @@
                  (label :text "/" :class "sep")
                  (battery)
                  (overlay
-                     :tooltip "Cpu: ${round(EWW_CPU.avg, 1)}%, Disk: ${round(EWW_DISK["/"].used_perc, 1)}%"
+                     :tooltip "Cpu: ${round(EWW_CPU.avg, 1)}%, Ram: ${round(EWW_RAM.used_mem_perc, 1)}%"
                      (cpu)
                      (ram))
                  (label :text "/" :class "sep")
