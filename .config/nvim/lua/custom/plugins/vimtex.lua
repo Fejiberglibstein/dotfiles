@@ -1,5 +1,15 @@
 return {
     {
+        dir = "~/projects/notes-nvim",
+        priority = 0,
+        config = function ()
+            print(vim.fn.getcwd(), vim.fn.expand("~/vault"))
+            if vim.fn.getcwd() == vim.fn.expand("~/vault") then
+                -- require('notes-nvim').setup()
+            end
+        end
+    },
+    {
         "iurimateus/luasnip-latex-snippets.nvim",
         dependencies = { "lervag/vimtex", "L3MON4D3/LuaSnip" },
         ft = { "tex" },
