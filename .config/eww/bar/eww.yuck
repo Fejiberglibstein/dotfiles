@@ -41,11 +41,11 @@
 
 (deflisten workspaces 
     :initial '[{"id":"1","windows":1}]'
-    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh all"`)
+    `./bar/scripts/workspaces.sh all`)
 
 (deflisten active_workspace
     :initial "1"
-    `./bar/scripts/poll.sh "./bar/scripts/workspaces.sh active"`)
+    `./bar/scripts/workspaces.sh active`)
 
 
 (defwidget bbox [orientation]
@@ -71,7 +71,7 @@
         (circular-progress 
             :style {color != "" ? "color: ${color}" : ""}
             :width 20
-            :clockwise {!reverse}
+            :clockwise {reverse != "" ? false : true}
             :thickness 3
             :value value
             (cbox (box :class "dot" :style {color != "" ? "background-color: ${color}" : ""})))))
