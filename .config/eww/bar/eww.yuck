@@ -14,8 +14,8 @@
                  (battery)
                  (overlay
                      :tooltip "Cpu: ${round(EWW_CPU.avg, 1)}%, Ram: ${round(EWW_RAM.used_mem_perc, 1)}%"
-                     (cpu)
-                     (ram))
+                     (ram)
+                     (cpu))
                  (label :text "/" :class "sep")
                  (time))))
 
@@ -153,7 +153,7 @@
 
 (defwidget cpu []
     (circle
-        :color "#b7bdf8"
+        :color "darker(#7dc4e4)"
         :value {EWW_CPU.avg}))
 
 (defwidget ram []
@@ -169,7 +169,9 @@
         :space-evenly false
         (for workspace in workspaces
              (bbox :orientation "v"
-                   (box :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}")))))
+                   (button 
+                       :class "workspace${workspace.id == active_workspace ? " current" : ""}${workspace.windows == 0 ? " empty" : ""}"
+                       :onclick "hyprctl dispatch workspace ${workspace.id}")))))
 
 (defwidget brightness []
     (slider
