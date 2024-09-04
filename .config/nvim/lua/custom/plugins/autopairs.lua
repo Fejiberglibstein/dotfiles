@@ -28,8 +28,16 @@ return {
         npairs.add_rule(
             Rule("$$", "$$", "tex")
             :with_pair(cond.after_text("$"))
-            :replace_endpair(function () print("HIII") return "$" end)
+            :replace_endpair(function () return "$" end)
         )
+
+
+        npairs.add_rule(
+            Rule("$ ", " $", "tex")
+            :with_pair(cond.after_text("$"))
+            :replace_endpair(function () return " " end)
+        )
+
 
     end
 }
