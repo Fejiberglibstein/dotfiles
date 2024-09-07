@@ -153,12 +153,12 @@
 
 (defwidget cpu []
     (circle
-        :color "darker(#7dc4e4)"
+        :color "#91d7e3"
         :value {EWW_CPU.avg}))
 
 (defwidget ram []
     (circle
-        :color "#f5a97f"
+        :color "#c6a0f6"
         :reverse true
         :value {EWW_RAM.used_mem_perc}))
 
