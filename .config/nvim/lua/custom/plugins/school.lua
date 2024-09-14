@@ -1,8 +1,22 @@
 return {
     {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        opts = {
+            code = { left_pad = 1, },
+            latex = { enabled = false },
+            heading = {
+                border = true,
+                width = 'block',
+                min_width = 80,
+            }
+        },
+    },
+    { "jannis-baum/vivify.vim", },
+    {
         dir = "~/projects/notes-nvim",
         priority = 0,
-        config = function ()
+        config = function()
             print(vim.fn.getcwd(), vim.fn.expand("~/vault"))
             if vim.fn.getcwd() == vim.fn.expand("~/vault") then
                 -- require('notes-nvim').setup()
