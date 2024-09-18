@@ -16,7 +16,7 @@ return {
         local cond = require('nvim-autopairs.conds')
 
         npairs.add_rules({
-                Rule("$", "$", { "tex", "md" })
+                Rule("$", "$", { "tex", "markdown" })
                 -- don't add a pair if the next character is %
                     :with_pair(cond.not_after_regex("%%"))
                 -- don't move right when repeat character
@@ -26,14 +26,14 @@ return {
             })
 
         npairs.add_rule(
-            Rule("$$", "$$", { "tex", "md" })
+            Rule("$$", "$$", { "tex", "markdown" })
             :with_pair(cond.after_text("$"))
             :replace_endpair(function () return "$" end)
         )
 
 
         npairs.add_rule(
-            Rule("$ ", " $", { "tex", "md" })
+            Rule("$ ", " $", { "tex", "markdown" })
             :with_pair(cond.after_text("$"))
             :replace_endpair(function () return " " end)
         )
