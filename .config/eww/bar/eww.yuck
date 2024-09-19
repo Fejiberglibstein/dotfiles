@@ -8,10 +8,8 @@
         (content :side "center"
                  (workspaces))
         (content :side "end"
-                 (brightness)
                  (sound)
                  (label :text "/" :class "sep")
-                 (battery)
                  (overlay
                      :tooltip "Cpu: ${round(EWW_CPU.avg, 1)}%, Ram: ${round(EWW_RAM.used_mem_perc, 1)}%"
                      (ram)
