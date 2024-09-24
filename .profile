@@ -14,12 +14,13 @@ export PATH=$GOPATH/bin:$PATH
 
 alias locker='~/.config/hypr/scripts/lock_screen.sh'
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT1"
+alias tm="tmux a || tmux"
+
 alias ls='ls --color=auto'
 alias grep='rg --color=auto'
 alias cat="bat"
 # Zoxide
 alias cd="z"
-
 
 function nmtui () {
     nmcli device wifi rescan
