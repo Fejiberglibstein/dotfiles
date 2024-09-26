@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('gr', require('telescope.builtin').lsp_references, 'Go to references')
 
         -- Go to type definition of word under cursor
-        map('gD', require('telescope.builtin').lsp_definitions, 'Goto type definition')
+        map('gD', require('telescope.builtin').lsp_type_definitions, 'Goto type definition')
 
         -- LOOK INTO:
         --
