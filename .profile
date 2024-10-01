@@ -42,7 +42,7 @@ function ssh () {
 
     if [ -n "${TMUX}" ]; then
 	tmux set status on
-	tmux set prefix C-s
+	tmux set prefix C-f
     fi
 }
 
