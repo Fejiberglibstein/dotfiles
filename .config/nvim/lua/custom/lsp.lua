@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Go to the definition of symbol under cursor
         map('gd', require('telescope.builtin').lsp_definitions, 'Goto definition')
-        -- Find all references for symbol under cursor  
+        -- Find all references for symbol under cursor
         map('gr', require('telescope.builtin').lsp_references, 'Go to references')
 
         -- Go to type definition of word under cursor
@@ -57,7 +57,15 @@ require('mason-lspconfig').setup_handlers({
     function(server_name)
         require('lspconfig')[server_name].setup {}
     end,
-    -- ["rust_analyzer"] = function() 
-        -- require("rust-tools").setup {}
-    -- end
+    ["rust_analyzer"] = function()
+        require('lspconfig')['rust_analyzer'].setup {
+            settings = {
+                ["rust-analyzer"] = {
+                    -- check = { command = "clippy" }
+
+                }
+            }
+
+        }
+    end
 })
