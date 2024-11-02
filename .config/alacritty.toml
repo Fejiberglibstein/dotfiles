@@ -6,7 +6,7 @@ family = "CaskaydiaCove Nerd Font"
 style = "Regular"
 
 [env]
-term = "xterm-256color"
+term = "alacritty"
 
 [window]
 opacity = 0.85
