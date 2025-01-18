@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-result=$(fd . ~/wallpapers/ |
+result=$(find ~/wallpapers/ |
+	sed 's/\/home\/'$USER'/~/' |
 	xargs -I {} echo -en "{}\0icon\x1f{}\n" | 
 	shuf |
 	rofi -dmenu \
