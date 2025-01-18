@@ -5,7 +5,12 @@ return {
         ft = { "markdown" },
         opts = {
             overrides = { buftype = { nofile = { enabled = false } } },
-            code = { left_pad = 1, width = "block", min_width = 80 },
+            code = {
+                width = 'block',
+                min_width = 80,
+                left_pad = 1,
+                style = "normal"
+            },
             latex = { enabled = false },
             ft = { "markdown" },
             heading = {

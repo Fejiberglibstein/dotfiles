@@ -71,7 +71,7 @@ local function select_comment(around)
 
     commentstring = commentstring:gsub("%%s", ".*") -- Replace %s with .* (lua regex for any repeated char)
     commentstring = commentstring:gsub("%-", "%%-") -- Replace - with %- since - is part of lua regex
-    commentstring = commentstring:gsub(" ", "") -- Replace " " with nothing so empty comments still count
+    commentstring = commentstring:gsub(" ", "")     -- Replace " " with nothing so empty comments still count
 
 
     local comment_pat = '^%s*' .. commentstring .. '$'
