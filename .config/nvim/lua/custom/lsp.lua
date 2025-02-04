@@ -71,6 +71,25 @@ require('mason-lspconfig').setup_handlers({
                 }
             }
         }
+    end,
+    ["clangd"] = function()
+        require('lspconfig')["clangd"].setup {
+            cmd = {
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "--clang-tidy-checks=*",
+                "--completion-style=bundled",
+                "--cross-file-rename",
+                "--header-insertion=iwyu",
+            },
+            init_options = {
+                clangdFileStatus = true, -- Provides information about activity on clangd’s per-file worker thread
+                usePlaceholders = true,
+                completeUnimported = true,
+                semanticHighlighting = true,
+            },
+        }
     end
     -- ["rust_analyzer"] = function()
     -- require("rust-tools").setup {}
