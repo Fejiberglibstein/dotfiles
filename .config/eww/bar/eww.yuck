@@ -131,17 +131,13 @@
                 :class "time"
                 :space-evenly false
                 (label :text "${formattime(EWW_TIME, '%I:%M')}"))
-            (revealer
-                :reveal time_reveal
-                :transition "slideright"
-                :duration 100
-                (box
-                    :spacing 5
-                    :class "date"
-                    :space-evenly false
-                    (label) ;; to align things properly
-                    (label :text "-")
-                    (label :text "${formattime(EWW_TIME, '%b %e')}"))))))
+            (box
+               :spacing 5
+               :class "date"
+               :space-evenly false
+               (label) ;; to align things properly
+               (label :text "-")
+               (label :text "${formattime(EWW_TIME, '%b %e')}")))))
 
 (defwidget battery []
     (box

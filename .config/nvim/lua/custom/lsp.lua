@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
+        vim.keymap.set('i', '<c-y>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'LSP: signature help' })
 
         -- Diagnostic Keymaps
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
@@ -56,6 +57,17 @@ require('mason-lspconfig').setup_handlers({
     -- :h mason-lspconfig-automatic-server-setup
     function(server_name)
         require('lspconfig')[server_name].setup {}
+    end,
+    ["rust_analyzer"] = function()
+        require('lspconfig')['rust_analyzer'].setup {
+            settings = {
+                ["rust-analyzer"] = {
+                    -- check = { command = "clippy" }
+
+                }
+            }
+
+        }
     end,
     ["lua_ls"] = function()
         require('lspconfig')["lua_ls"].setup {
@@ -91,7 +103,4 @@ require('mason-lspconfig').setup_handlers({
             },
         }
     end
-    -- ["rust_analyzer"] = function()
-    -- require("rust-tools").setup {}
-    -- end
 })
