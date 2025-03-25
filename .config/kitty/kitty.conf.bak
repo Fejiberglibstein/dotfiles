@@ -1,6 +1,4 @@
 # BEGIN_KITTY_THEME
-# Dracula
+# Spring
 include current-theme.conf
-font_family CaskaydiaCove Nerd Font
-
 # END_KITTY_THEME

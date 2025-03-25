@@ -22,6 +22,8 @@ alias cat="bat"
 # Zoxide
 alias cd="z"
 
+alias virtualbox='QT_QPA_PLATFORM=xcb virtualbox'
+
 function nmtui () {
     nmcli device wifi rescan
     c="$COLORTERM"
@@ -48,4 +50,5 @@ function ssh () {
 
 
 # TERM="tmux-256color"
+
 

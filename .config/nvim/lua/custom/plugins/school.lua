@@ -1,5 +1,11 @@
 return {
     {
+        'chomosuke/typst-preview.nvim',
+        lazy = false, -- or ft = 'typst'
+        version = '1.*',
+        opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+    },
+    {
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
         ft = { "markdown" },
@@ -27,7 +33,7 @@ return {
         dir = "~/projects/notes-nvim",
         priority = 0,
         config = function()
-            print(vim.fn.getcwd(), vim.fn.expand("~/vault"))
+            -- print(vim.fn.getcwd(), vim.fn.expand("~/vault"))
             if vim.fn.getcwd() == vim.fn.expand("~/vault") then
                 -- require('notes-nvim').setup()
             end

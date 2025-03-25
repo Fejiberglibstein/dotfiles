@@ -9,11 +9,11 @@ style = "Regular"
 term = "alacritty"
 
 [window]
-opacity = 0.85
+opacity = 0.75
 
 # Default colors
 [colors.primary]
-background = '#24273A' # base
+background = '#212129' # base
 foreground = '#CAD3F5' # text
 # Bright and dim foreground colors
 dim_foreground = '#CAD3F5' # text

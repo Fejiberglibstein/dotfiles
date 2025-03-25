@@ -2,7 +2,7 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<ESC>', "<CMD>nohlsearch<CR>")
 
--- Terminal exit terminal mode 
+-- Terminal exit terminal mode
 vim.keymap.set('t', '<ESC><ESC>', "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Keymaps for J and K in visual mode
@@ -22,6 +22,19 @@ vim.keymap.set('c', '<c-f>', '<right>');
 
 vim.keymap.set('c', '<a-b>', '<s-left>');
 vim.keymap.set('c', '<a-f>', '<s-right>');
+
+
+-- nicer window nav, matches what I have in tmux
+vim.keymap.set('n', '<c-w><c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-w><c-l>', '<c-w>l')
+vim.keymap.set('n', '<c-w><c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-w><c-k>', '<c-w>k')
+
+vim.keymap.set('n', '<c-w>l', '<c-w><')
+vim.keymap.set('n', '<c-w>l', '<c-w>>')
+vim.keymap.set('n', '<c-w>j', '<c-w>+')
+vim.keymap.set('n', '<c-w>k', '<c-w>-')
+
 
 -- When pressing J keep cursor in same spot
 vim.keymap.set('n', 'J', "mzJ`z")
@@ -85,38 +98,3 @@ vim.keymap.set('n', '<c-u>', '<c-u>zz');
 -- cursor_moved_fn(function()
 -- cursor_moved = true
 -- end)
-
-local function select_indent()
-    local line = vim.fn.line('.');
-    local indent = vim.fn.indent(line);
-    local start_line = line - 1;
-
-    local function is_line_blank(l)
-        return vim.fn.nextnonblank(l) ~= l
-    end
-
-    if is_line_blank(line) then
-        return;
-    end
-
-    while start_line > 0 and (vim.fn.indent(start_line) >= indent or is_line_blank(start_line)) do
-        vim.cmd('-');
-        start_line = vim.fn.line('.') - 1;
-    end
-
-    local end_line = vim.fn.line('.') + 1;
-    local last_line = vim.fn.line('$');
-
-    while end_line < last_line and (vim.fn.indent(end_line) >= indent or is_line_blank(end_line)) do
-        vim.cmd('+');
-        end_line = end_line + 1;
-    end
-
-    -- Go to start line
-    vim.fn.cursor(start_line, 0);
-    vim.cmd('norm! Vo');
-    vim.fn.cursor(end_line, 0);
-end
-
-vim.keymap.set('x', 'ii', select_indent);
-vim.keymap.set('o', 'ii', select_indent);
