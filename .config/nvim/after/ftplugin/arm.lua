@@ -3,6 +3,13 @@ vim.bo.comments      = "b:;,b:;;"
 vim.opt.colorcolumn  = "81"
 vim.opt.updatetime   = 250
 
+vim.keymap.set(
+	'n',
+	'<leader>r',
+	[[:s/\s*.ref \(.*\)/P\1: .word \1<cr>:noh<cr>]],
+	{ buffer = true }
+)
+
 
 -- Highlighting lines when you hover over a register
 local ns   = vim.api.nvim_create_namespace("RegHL")
@@ -82,12 +89,8 @@ vim.keymap.set('n', 'gd',
 -- Opening ccstudio and adding a build keymap
 --------------------------------------------------------------------------------
 
-if not Ccstudio then
-	Ccstudio = nil
-end
-
 if not Ccstudio_api_port then
-	Ccstudio_api_port = nil
+	Ccstudio_api_port = 2035
 end
 
 local namespace = vim.api.nvim_create_namespace("ccstudio")
@@ -106,6 +109,7 @@ local function ccs_build()
 	}):sync();
 	---@type {output: string}
 	local json = vim.fn.json_decode(res)
+	-- vim.print(json);
 
 	local last_err_bufnr = nil
 
@@ -155,36 +159,35 @@ local function ccs_build()
 	end
 end
 
-local function ccs_start()
-	if Ccstudio ~= nil then
-		return
-	end
-
-	print("starting ccstudio...")
-
-	Ccstudio = require 'plenary.job':new({
-		command = '/home/austint/ti/ccs1280/ccs/eclipse/ccstudio',
-		on_exit = function()
-			print('ccstudio exited')
-			Ccstudio = nil
-			Ccstudio_api_port = nil
-		end,
-		on_stdout = function(error, data, self)
-			local res = data:match('^CCS HTTP adapter started! %[ccs.port:(%d+)%]')
-			if res ~= nil then
-				print('CCS HTTP adapter was started on port' .. res)
-				Ccstudio_api_port = res
-				return
-			end
-		end
-	})
-
-	Ccstudio:start()
-end
+-- local function ccs_start()
+-- 	if Ccstudio ~= nil then
+-- 		return
+-- 	end
+--
+-- 	print("starting ccstudio...")
+--
+-- 	Ccstudio = require 'plenary.job':new({
+-- 		command = '/home/austint/ti/ccs1280/ccs/eclipse/ccstudio',
+-- 		on_exit = function()
+-- 			print('ccstudio exited')
+-- 			Ccstudio = nil
+-- 			Ccstudio_api_port = nil
+-- 		end,
+-- 		on_stdout = function(error, data, self)
+-- 			local res = data:match('^CCS HTTP adapter started! %[ccs.port:(%d+)%]')
+-- 			if res ~= nil then
+-- 				print('CCS HTTP adapter was started on port' .. res)
+-- 				Ccstudio_api_port = res
+-- 				return
+-- 			end
+-- 		end
+-- 	})
+--
+-- 	Ccstudio:start()
+-- end
 
 vim.keymap.set('n', '<leader><leader>b', function()
-	ccs_start()
-	if vim.wait(10000, function() return Ccstudio_api_port ~= nil end, 600) then
-		ccs_build()
+	if Ccstudio_api_port == nil then
 	end
+	ccs_build()
 end)

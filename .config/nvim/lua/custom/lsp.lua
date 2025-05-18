@@ -69,12 +69,15 @@ require('mason-lspconfig').setup_handlers({
 
         }
     end,
-    ['pylsp'] = function()
-        -- print(vim.fn.finddir(".venv", '**;'))
-        require('lspconfig')['pylsp'].setup {
-            cmd_env = { VIRTUAL_ENV = vim.fn.finddir(".venv", '**;') },
-        }
-    end,
+    -- Commented out because it makes neovim take 20 seconds to start. I think I
+    -- need to provide a .venv file somewhere, since it is currently searching
+    -- my entire computer for it lol
+    -- ['pylsp'] = function()
+    --     -- print(vim.fn.finddir(".venv", '**;'))
+    --     require('lspconfig')['pylsp'].setup {
+    --         cmd_env = { VIRTUAL_ENV = vim.fn.finddir(".venv", '**;') },
+    --     }
+    -- end,
     ["lua_ls"] = function()
         require('lspconfig')["lua_ls"].setup {
             settings = {
