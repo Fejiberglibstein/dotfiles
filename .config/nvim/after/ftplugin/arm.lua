@@ -11,6 +11,19 @@ vim.keymap.set(
 )
 
 
+vim.keymap.set('n', '[[',
+	'?;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'
+	.. '<cr><esc>',
+	{ buffer = true }
+)
+
+
+vim.keymap.set('n', ']]',
+	'/;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'
+	.. '<cr><esc>',
+	{ buffer = true }
+)
+
 -- Highlighting lines when you hover over a register
 local ns   = vim.api.nvim_create_namespace("RegHL")
 local mark = nil

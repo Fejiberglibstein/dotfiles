@@ -111,5 +111,13 @@ require('mason-lspconfig').setup_handlers({
                 semanticHighlighting = true,
             },
         }
+    end,
+    ["tinymist"] = function()
+        require('lspconfig')["tinymist"].setup {
+            settings = {
+                formatterMode = "typstyle",
+                formatterPrintWidth = 80,
+            },
+        }
     end
 })

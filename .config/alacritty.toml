@@ -2,8 +2,20 @@
 size = 12.0
 
 [font.normal]
-family = "CaskaydiaCove Nerd Font"
+# Hurmit Nerd Font
+# 0xProto Nerd Font
+# IosevkaTermSlab Nerd Font
+# JetBrainsMonoNL Nerd Font
+# VictorMono Nerd Font          - this one sucks
+# DaddyTimeMono Nerd Font
+# FantasqueSansM Nerd Font Mono 
+# CaskaydiaCove Nerd Font       - awesome
+family = "CaskaydiaCove Nerd Font       "                       
 style = "Regular"
+
+# [font.italic]
+# family = "IosevkaTermSlab Nerd Font"
+# style = "Italic"
 
 [env]
 term = "alacritty"

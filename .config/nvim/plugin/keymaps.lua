@@ -10,11 +10,12 @@ vim.keymap.set('v', 'J', function()
     local count = math.max(vim.v.count, 1)
     return ":m '>+" .. count .. "<CR>gv=gv"
 end, { expr = true, desc = "Move selected lines down when in visual mode" })
-
 vim.keymap.set('v', 'K', function()
     local count = math.max(vim.v.count, 1)
     return ":m '<-" .. count + 1 .. "<CR>gv=gv"
 end, { expr = true, desc = "Move selected lines up when in visual mode" })
+
+vim.keymap.set('v', 'gJ', 'J')
 
 -- Command mode moving around
 vim.keymap.set('c', '<c-b>', '<left>');

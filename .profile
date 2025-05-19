@@ -23,6 +23,7 @@ alias cat="bat"
 alias cd="z"
 
 alias virtualbox='QT_QPA_PLATFORM=xcb virtualbox'
+EDITOR="nvim" 
 
 function nmtui () {
     nmcli device wifi rescan
