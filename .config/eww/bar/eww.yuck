@@ -18,7 +18,7 @@
                  (time))))
 
 (defwindow bar
-    :monitor 0
+    :monitor '["DP-4", "eDP-1"]'
     :geometry (geometry
                   :x "0"
                   :width "100%"

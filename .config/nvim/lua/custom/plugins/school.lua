@@ -6,7 +6,7 @@ return {
 
         opts = {
             debug = true,
-            open_cmd = 'firefox --new-window %s -P typst-preview --class typst-preview',
+            open_cmd = 'firefox --new-window %s',
             dependencies_bin = {
                 ['tinymist'] = vim.fn.stdpath('data') .. '/mason/bin/tinymist'
             },
