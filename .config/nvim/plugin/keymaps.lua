@@ -37,6 +37,8 @@ vim.keymap.set('n', '<c-w>j', '<c-w>+')
 vim.keymap.set('n', '<c-w>k', '<c-w>-')
 
 
+vim.keymap.set('i', '<c-j>', "<c-o>O")
+
 -- When pressing J keep cursor in same spot
 vim.keymap.set('n', 'J', "mzJ`z")
 

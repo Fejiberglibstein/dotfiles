@@ -53,71 +53,71 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 
 require('mason').setup()
 require('mason-lspconfig').setup()
-require('mason-lspconfig').setup_handlers({
-    -- :h mason-lspconfig-automatic-server-setup
-    function(server_name)
-        require('lspconfig')[server_name].setup {}
-    end,
-    ["rust_analyzer"] = function()
-        require('lspconfig')['rust_analyzer'].setup {
-            settings = {
-                ["rust-analyzer"] = {
-                    -- check = { command = "clippy" }
-
-                }
-            }
-
-        }
-    end,
-    -- Commented out because it makes neovim take 20 seconds to start. I think I
-    -- need to provide a .venv file somewhere, since it is currently searching
-    -- my entire computer for it lol
-    -- ['pylsp'] = function()
-    --     -- print(vim.fn.finddir(".venv", '**;'))
-    --     require('lspconfig')['pylsp'].setup {
-    --         cmd_env = { VIRTUAL_ENV = vim.fn.finddir(".venv", '**;') },
-    --     }
-    -- end,
-    ["lua_ls"] = function()
-        require('lspconfig')["lua_ls"].setup {
-            settings = {
-                Lua = {
-                    workspace = {
-                        checkThirdParty = false,
-                        telemetry = { enable = false },
-                        library = {
-                            "${3rd}/love2d/library"
-                        }
-                    }
-                }
-            }
-        }
-    end,
-    ["clangd"] = function()
-        require('lspconfig')["clangd"].setup {
-            cmd = {
-                "clangd",
-                "--background-index",
-                "--clang-tidy",
-                "--clang-tidy-checks=*",
-                "--completion-style=bundled",
-                "--cross-file-rename",
-                "--header-insertion=iwyu",
-            },
-            init_options = {
-                clangdFileStatus = true, -- Provides information about activity on clangd’s per-file worker thread
-                usePlaceholders = true,
-                completeUnimported = true,
-                semanticHighlighting = true,
-            },
-        }
-    end,
-    ["tinymist"] = function()
-        require('lspconfig')["tinymist"].setup {
-            settings = {
-                formatterMode = "typstyle",
-                formatterPrintWidth = 80,
-            },
-        }
-    end
-})
+-- require('mason-lspconfig').setup_handlers({
+--     -- :h mason-lspconfig-automatic-server-setup
+--     function(server_name)
+--         require('lspconfig')[server_name].setup {}
+--     end,
+--     ["rust_analyzer"] = function()
+--         require('lspconfig')['rust_analyzer'].setup {
+--             settings = {
+--                 ["rust-analyzer"] = {
+--                     -- check = { command = "clippy" }
+--
+--                 }
+--             }
+--
+--         }
+--     end,
+--     -- Commented out because it makes neovim take 20 seconds to start. I think I
+--     -- need to provide a .venv file somewhere, since it is currently searching
+--     -- my entire computer for it lol
+--     -- ['pylsp'] = function()
+--     --     -- print(vim.fn.finddir(".venv", '**;'))
+--     --     require('lspconfig')['pylsp'].setup {
+--     --         cmd_env = { VIRTUAL_ENV = vim.fn.finddir(".venv", '**;') },
+--     --     }
+--     -- end,
+--     ["lua_ls"] = function()
+--         require('lspconfig')["lua_ls"].setup {
+--             settings = {
+--                 Lua = {
+--                     workspace = {
+--                         checkThirdParty = false,
+--                         telemetry = { enable = false },
+--                         library = {
+--                             "${3rd}/love2d/library"
+--                         }
+--                     }
+--                 }
+--             }
+--         }
+--     end,
+--     ["clangd"] = function()
+--         require('lspconfig')["clangd"].setup {
+--             cmd = {
+--                 "clangd",
+--                 "--background-index",
+--                 "--clang-tidy",
+--                 "--clang-tidy-checks=*",
+--                 "--completion-style=bundled",
+--                 "--cross-file-rename",
+--                 "--header-insertion=iwyu",
+--             },
+--             init_options = {
+--                 clangdFileStatus = true, -- Provides information about activity on clangd’s per-file worker thread
+--                 usePlaceholders = true,
+--                 completeUnimported = true,
+--                 semanticHighlighting = true,
+--             },
+--         }
+--     end,
+--     ["tinymist"] = function()
+--         require('lspconfig')["tinymist"].setup {
+--             settings = {
+--                 formatterMode = "typstyle",
+--                 formatterPrintWidth = 80,
+--             },
+--         }
+--     end
+-- })
