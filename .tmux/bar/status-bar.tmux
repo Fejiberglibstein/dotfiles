@@ -5,15 +5,15 @@ set status-bg default
 
 # 0f\€ý5lve"+pjvi'"+pk_wYjjo:0Dkvi'pjddkkk:w:!tmux source %
 
-# .!%:p:h/dim '\#3d4070'
-set @window-color '#3d4070'
-set @window-dim '#2c2d45'
+# .!%:p:h/dim '\#383c45' 0.5
+set @window-color '#383c45'
+set @window-dim '#2c2e37'
 
-# .!%:p:h/dim '\#b54a2a'
-set @active-window-color '#b54a2a'
-set @active-window-dim '#5c3129'
+# .!%:p:h/dim '\#603dbf' 0.5
+set @active-window-color '#603dbf'
+set @active-window-dim '#402f74'
 
-# set @window-pre-format ' #[fg=#{@window-dim}]î‚¶'
+# set @window-pre-format ' #[fg=#{@window-dim}]¿'
 set -u @window-post-format '#[fg=#{@window-dim}]î‚´'
 
 # set -g window-status-format '#[bg=#{@window-dim}]#I '
@@ -26,7 +26,7 @@ set -g window-status-format \
 #[fg=#{@window-color} bg=#{@window-dim}]î‚´\
 #[fg=#abcdef] #W\
 #[fg=#{@window-dim} bg=default]î‚´ '
-#
+
 set -g window-status-current-format \
 '#[fg=#{@active-window-color}]î‚¶\
 #[bg=#{@active-window-color} fg=#abcdef]#I\
