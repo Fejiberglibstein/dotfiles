@@ -17,8 +17,9 @@
                  (label :text "/" :class "sep")
                  (time))))
 
+
 (defwindow bar
-    :monitor '["DP-4", "eDP-1"]'
+    :monitor '["DP-3", "eDP-1"]'
     :geometry (geometry
                   :x "0"
                   :width "100%"
