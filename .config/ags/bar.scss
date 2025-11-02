@@ -35,6 +35,12 @@ window.Bar {
     }
 }
 
+.container {
+    background-color: $base;
+    padding: 4px;
+    border-radius: 10px;
+}
+
 .workspace {
     all: unset;
     padding: 5px;
