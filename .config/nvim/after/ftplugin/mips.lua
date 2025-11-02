@@ -4,7 +4,6 @@ vim.bo.syntax        = "asm"
 vim.opt.colorcolumn  = "81"
 vim.opt.updatetime = 250
 
-
 local ns = vim.api.nvim_create_namespace("RegHL")
 local mark = nil
 

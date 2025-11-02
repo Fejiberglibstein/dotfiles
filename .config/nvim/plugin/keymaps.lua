@@ -17,6 +17,8 @@ end, { expr = true, desc = "Move selected lines up when in visual mode" })
 
 vim.keymap.set('v', 'gJ', 'J')
 
+vim.keymap.set('n', 'vv', 'v$h')
+
 -- Command mode moving around
 vim.keymap.set('c', '<c-b>', '<left>');
 vim.keymap.set('c', '<c-f>', '<right>');
@@ -36,6 +38,9 @@ vim.keymap.set('n', '<c-w>l', '<c-w>>')
 vim.keymap.set('n', '<c-w>j', '<c-w>+')
 vim.keymap.set('n', '<c-w>k', '<c-w>-')
 
+
+vim.keymap.set('n', '<leader>o', 'o<c-u>')
+vim.keymap.set('n', '<leader>O', 'O<c-u>')
 
 vim.keymap.set('i', '<c-j>', "<c-o>O")
 

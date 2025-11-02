@@ -5,6 +5,11 @@ pcall(require('telescope').load_extension, 'ui-select')
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = "Search Help" })
 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = "Search Files" })
+vim.keymap.set('n', '<leader>sF', function()
+    builtin.find_files({
+        hidden = true,
+    })
+end, { desc = "Search Files" })
 vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = "Search Resume" })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = "Search Diagnostics" })
 

@@ -11,16 +11,16 @@ vim.keymap.set(
 )
 
 
-vim.keymap.set('n', '[[',
+vim.keymap.set({ 'n', 'v' }, '[[',
 	'?;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'
-	.. '<cr><esc>',
+	.. '<cr>:noh<cr>',
 	{ buffer = true }
 )
 
 
-vim.keymap.set('n', ']]',
+vim.keymap.set({ 'n', 'v' }, ']]',
 	'/;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'
-	.. '<cr><esc>',
+	.. '<cr>:noh<cr>',
 	{ buffer = true }
 )
 
@@ -102,10 +102,6 @@ vim.keymap.set('n', 'gd',
 -- Opening ccstudio and adding a build keymap
 --------------------------------------------------------------------------------
 
-if not Ccstudio_api_port then
-	Ccstudio_api_port = 2035
-end
-
 local namespace = vim.api.nvim_create_namespace("ccstudio")
 
 local function ccs_build()
@@ -172,35 +168,123 @@ local function ccs_build()
 	end
 end
 
--- local function ccs_start()
--- 	if Ccstudio ~= nil then
--- 		return
--- 	end
---
--- 	print("starting ccstudio...")
---
--- 	Ccstudio = require 'plenary.job':new({
--- 		command = '/home/austint/ti/ccs1280/ccs/eclipse/ccstudio',
--- 		on_exit = function()
--- 			print('ccstudio exited')
--- 			Ccstudio = nil
--- 			Ccstudio_api_port = nil
--- 		end,
--- 		on_stdout = function(error, data, self)
--- 			local res = data:match('^CCS HTTP adapter started! %[ccs.port:(%d+)%]')
--- 			if res ~= nil then
--- 				print('CCS HTTP adapter was started on port' .. res)
--- 				Ccstudio_api_port = res
--- 				return
--- 			end
--- 		end
--- 	})
---
--- 	Ccstudio:start()
--- end
+local function ccs_debug()
+	print("debugging...")
+	local res = require('plenary.job'):new({
+		command = 'curl',
+		args = {
+			'localhost:'
+			.. Ccstudio_api_port
+			.. '/ide/debugProjects?projectNames='
+			.. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") }
+	}):sync();
+end
 
-vim.keymap.set('n', '<leader><leader>b', function()
+local function ccs_start()
+	print("starting ccstudio...")
+
+	Ccstudio = require 'plenary.job':new({
+		command = '/home/austint/ti/ccs1281/ccs/eclipse/ccstudio',
+		on_exit = function()
+			print('ccstudio exited')
+			Ccstudio = nil
+			Ccstudio_api_port = nil
+		end,
+		on_stdout = function(error, data, self)
+			local res = data:match('^CCS HTTP adapter started! %[ccs.port:(%d+)%]')
+			if res ~= nil then
+				print('CCS HTTP adapter was started on port' .. res)
+				Ccstudio_api_port = res
+				return
+			end
+		end
+	})
+
+	Ccstudio:start()
+end
+
+vim.keymap.set('n', '<leader>b', function()
 	if Ccstudio_api_port == nil then
+		ccs_start()
 	end
 	ccs_build()
 end)
+
+vim.keymap.set('n', '<leader>d', function()
+	if Ccstudio_api_port == nil then
+		ccs_start()
+	end
+	ccs_debug()
+end)
+
+
+--------------------------------------------------------------------------------
+---							 'K' for documentation
+--------------------------------------------------------------------------------
+
+local hover_ns = vim.api.nvim_create_namespace('nvim.lsp.hover_range')
+
+
+local function get_documentation_for_line()
+	local procedure_name = vim.fn.expand("<cword>")
+	local bufnr = vim.fn.bufnr("%")
+
+	local line = vim.fn.getline(vim.fn.line('.'))
+
+	if not line:find("^%s*bl ") then
+		return
+	end
+
+	local contents = nil
+
+	for _, file in ipairs(AsmDocumentation) do
+		for _, procedure in ipairs(file.procedures) do
+			if procedure.name == procedure_name then
+				contents = procedure.raw
+				break
+			end
+		end
+		if contents ~= nil then
+			break
+		end
+	end
+
+	if contents == nil then
+		print("No documentation found")
+		return
+	end
+
+	local lines = { "```" .. procedure_name .. "```", "" }
+	for line in string.gmatch(contents, "([^\n\r]+)") do
+		table.insert(lines, line)
+	end
+
+	local _, winid = vim.lsp.util.open_floating_preview(lines, 'markdown', {})
+
+	vim.api.nvim_create_autocmd('WinClosed', {
+		pattern = tostring(winid),
+		once = true,
+		callback = function()
+			vim.api.nvim_buf_clear_namespace(bufnr, hover_ns, 0, -1)
+			return true
+		end,
+	})
+end
+
+local function load_docs()
+	local file = io.open('./docs.json', 'r')
+	if file == nil then
+		print("docs file not found")
+		return
+	end
+	AsmDocumentation = file:read('*all')
+	AsmDocumentation = vim.json.decode(AsmDocumentation)
+	file:close()
+end
+
+vim.keymap.set('n', 'K', function()
+	if AsmDocumentation == nil then
+		load_docs()
+	end
+	get_documentation_for_line()
+end, { buffer = 0 })

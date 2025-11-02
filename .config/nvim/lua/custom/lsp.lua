@@ -53,6 +53,44 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 
 require('mason').setup()
 require('mason-lspconfig').setup()
+vim.lsp.config["lua_ls"] = {
+    Lua = {
+        workspace = {
+            checkThirdParty = false,
+            telemetry = { enable = false },
+            library = {
+                "${3rd}/love2d/library"
+            }
+        }
+    }
+}
+vim.lsp.config["clangd"] = {
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--clang-tidy-checks=*",
+        "--completion-style=bundled",
+        "--cross-file-rename",
+        "--header-insertion=iwyu",
+    },
+    init_options = {
+        clangdFileStatus = true, -- Provides information about activity on clangd’s per-file worker thread
+        usePlaceholders = true,
+        completeUnimported = true,
+        semanticHighlighting = true,
+    },
+}
+
+require('lspconfig')["tinymist"].setup { "/home/" }
+vim.lsp.config["tinymist"] = {
+    settings = {
+        formatterMode = "typstyle",
+        formatterPrintWidth = 80,
+        rootPath = "/home/"
+    },
+}
+
 -- require('mason-lspconfig').setup_handlers({
 --     -- :h mason-lspconfig-automatic-server-setup
 --     function(server_name)

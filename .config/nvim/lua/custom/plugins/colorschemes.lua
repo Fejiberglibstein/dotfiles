@@ -1,5 +1,33 @@
 return {
     {
+        "sainnhe/sonokai",
+        priority = 1000,
+        name = 'sonokai',
+        opts = {
+
+        },
+
+        config = function(_, opts)
+            vim.cmd'let g:sonokai_transparent_background = 2'
+            vim.cmd'let g:sonokai_style = "andromeda"'
+            -- vim.cmd.colorscheme "sonokai"
+        end
+    },
+    {
+        "EdenEast/nightfox.nvim",
+        priority = 1000,
+        name = 'nightfox',
+        opts = {
+            options = {
+                transparent = true,
+            }
+        },
+        config = function(_, opts)
+            require('nightfox').setup(opts)
+            vim.cmd.colorscheme "nordfox"
+        end,
+    },
+    {
         "catppuccin/nvim",
         name = "catppuccin",
         priority = 1000,
@@ -21,7 +49,7 @@ return {
         },
         config = function(_, opts)
             require('catppuccin').setup(opts)
-            vim.cmd.colorscheme "catppuccin"
+            -- vim.cmd.colorscheme "catppuccin"
         end
     },
     {
@@ -30,7 +58,7 @@ return {
         name = 'tokyonight',
         --- @type tokyonight.Config
         opts = {
-            transparent = true,
+            -- transparent = true,
             style = "night",
             -- dim_inactive = true,
         },
