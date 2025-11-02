@@ -2,14 +2,17 @@
     (box
         :class "bar_mod"
         :orientation "h"
-        (content 
-            :side "start")
+        (content :side "start")
 
         (content :side "center"
                  (workspaces))
         (content :side "end"
                  (sound)
+                 ;* if sys.hostname == "laptop" then
+                 (brightness)
+                 ;* end
                  (label :text "/" :class "sep")
+                 (battery)
                  (overlay
                      :tooltip "Cpu: ${round(EWW_CPU.avg, 1)}%, Ram: ${round(EWW_RAM.used_mem_perc, 1)}%"
                      (ram)
