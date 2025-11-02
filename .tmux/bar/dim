@@ -21,5 +21,5 @@ def mix_hex_colors(color1, color2, perc):
 
 
 perc = sys.argv[2] if len(sys.argv) > 2 else 0.4
-mixed_color = mix_hex_colors(sys.argv[1], "#212129", float(perc))
+mixed_color = mix_hex_colors(sys.argv[1], "#131417", float(perc))
 print(mixed_color)

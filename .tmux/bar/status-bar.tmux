@@ -5,13 +5,13 @@ set status-bg default
 
 # 0f\€ý5lve"+pjvi'"+pk_wYjjo:0Dkvi'pjddkkk:w:!tmux source %
 
-# .!%:p:h/dim '\#383c45' 0.5
+# .!%:p:h/dim '\#383c45' 0.4
 set @window-color '#383c45'
-set @window-dim '#2c2e37'
+set @window-dim '#212429'
 
-# .!%:p:h/dim '\#603dbf' 0.5
+# .!%:p:h/dim '\#603dbf' 0.4
 set @active-window-color '#603dbf'
-set @active-window-dim '#402f74'
+set @active-window-dim '#31245a'
 
 # set @window-pre-format ' #[fg=#{@window-dim}]¿'
 set -u @window-post-format '#[fg=#{@window-dim}]î‚´'
