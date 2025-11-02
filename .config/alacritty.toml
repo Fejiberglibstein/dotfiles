@@ -25,7 +25,7 @@ opacity = 0.75
 
 # Default colors
 [colors.primary]
-background = '#212129' # base
+background = '#131417' # base
 foreground = '#CAD3F5' # text
 # Bright and dim foreground colors
 dim_foreground = '#CAD3F5' # text
