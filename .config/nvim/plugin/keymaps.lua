@@ -2,6 +2,12 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<ESC>', "<CMD>nohlsearch<CR>")
 
+vim.api.nvim_create_user_command(
+    "Align",
+    [['<,'>!awk '{print length, $0 }' | sort -sn | cut -d" " -f2-]],
+    { range = true }
+)
+
 -- Terminal exit terminal mode
 vim.keymap.set('t', '<ESC><ESC>', "<C-\\><C-n>", { desc = "Exit terminal mode" })
 

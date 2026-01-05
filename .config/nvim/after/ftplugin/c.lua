@@ -1,4 +1,6 @@
 vim.bo.commentstring = "// %s"
+vim.opt.colorcolumn = "101"
+vim.opt.textwidth = 100
 
 -- this doesn't work lol
 -- trying to make header files have a filetype of c

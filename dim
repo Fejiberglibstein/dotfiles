@@ -1,0 +1,25 @@
+#!/bin/env python
+import sys
+
+
+def mix_hex_colors(color1, color2, perc):
+    color1 = color1.lstrip("#")
+    color2 = color2.lstrip("#")
+
+    r1, g1, b1 = int(color1[0:2], 16), int(
+        color1[2:4], 16), int(color1[4:6], 16)
+    r2, g2, b2 = int(color2[0:2], 16), int(
+        color2[2:4], 16), int(color2[4:6], 16)
+
+    # Average the RGB components
+    r_mixed = int(r1 * perc + r2 * (1 - perc))
+    g_mixed = int(g1 * perc + g2 * (1 - perc))
+    b_mixed = int(b1 * perc + b2 * (1 - perc))
+
+    # Convert back to hex and return
+    return "#{:02x}{:02x}{:02x}".format(r_mixed, g_mixed, b_mixed)
+
+
+perc = sys.argv[2] if len(sys.argv) > 2 else 0.4
+mixed_color = mix_hex_colors(sys.argv[1], "#131417", float(perc))
+print(mixed_color)

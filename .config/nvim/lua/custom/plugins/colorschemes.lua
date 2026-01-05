@@ -8,8 +8,8 @@ return {
         },
 
         config = function(_, opts)
-            vim.cmd'let g:sonokai_transparent_background = 2'
-            vim.cmd'let g:sonokai_style = "andromeda"'
+            vim.cmd 'let g:sonokai_transparent_background = 2'
+            vim.cmd 'let g:sonokai_style = "andromeda"'
             -- vim.cmd.colorscheme "sonokai"
         end
     },
@@ -17,13 +17,8 @@ return {
         "EdenEast/nightfox.nvim",
         priority = 1000,
         name = 'nightfox',
-        opts = {
-            options = {
-                transparent = true,
-            }
-        },
         config = function(_, opts)
-            require('nightfox').setup(opts)
+            require('custom.colorschemes')
             vim.cmd.colorscheme "nordfox"
         end,
     },

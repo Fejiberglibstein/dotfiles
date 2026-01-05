@@ -1,6 +1,8 @@
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
+vim.opt.virtualedit = "block"
+
 vim.g.have_nerd_font = true
 
 vim.opt.number = true

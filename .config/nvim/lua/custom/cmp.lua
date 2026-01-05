@@ -79,8 +79,10 @@ end
 
 cmp.setup({
     window = {
+        documentation = cmp.config.window.bordered(),
         completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            border = 'rounded',
+            winhighlight = 'Normal:PMenu,FloatBorder:Pmenu,Search:None',
             col_offset = -1,
             side_padding = 0,
         },

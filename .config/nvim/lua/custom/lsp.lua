@@ -56,12 +56,14 @@ require('mason-lspconfig').setup()
 vim.lsp.config["lua_ls"] = {
     Lua = {
         workspace = {
-            checkThirdParty = false,
+            userThirdParty = {os.getenv("HOME") .. ".local/share/LuaAddons"},
+            checkThirdParty = "Apply",
             telemetry = { enable = false },
             library = {
-                "${3rd}/love2d/library"
+                [vim.fn.expand "${3rd}/love2d/library"] = true,
             }
-        }
+        },
+        diagnostics = { global = { 'love' } }
     }
 }
 vim.lsp.config["clangd"] = {
