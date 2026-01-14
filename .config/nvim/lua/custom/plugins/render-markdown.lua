@@ -1,0 +1,29 @@
+return {}
+-- return {
+--     'MeanderingProgrammer/render-markdown.nvim',
+--     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+--     ---@module 'render-markdown'
+--     ---@type render.md.UserConfig
+--     opts = {
+--         file_types = { 'markdown', 'c' },
+--         injections = {
+--             gitcommit = {
+--                 enabled = true,
+--                 query = [[
+--                 ((message) @injection.content
+--                     (#set! injection.combined)
+--                     (#set! injection.include-children)
+--                     (#set! injection.language "markdown"))
+--                 ]],
+--             },
+--             c = {
+--                 enabled = true,
+--                 query = [[
+--                     ;; extend
+--                     ((comment) @injection.content
+--                         (#set! injection.language "markdown"))
+--                 ]],
+--             },
+--         },
+--     }
+-- }

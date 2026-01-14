@@ -8,5 +8,4 @@ return {
     config = function()
         require("custom.treesitter")
     end
-    ,
 }

@@ -84,7 +84,7 @@ vim.lsp.config["clangd"] = {
     },
 }
 
-require('lspconfig')["tinymist"].setup { "/home/" }
+-- vim.lsp.config["tinymist"]{ "/home/" }
 vim.lsp.config["tinymist"] = {
     settings = {
         formatterMode = "typstyle",

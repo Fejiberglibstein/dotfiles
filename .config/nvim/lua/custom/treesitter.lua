@@ -60,3 +60,16 @@ require 'nvim-treesitter.configs'.setup {
         },
     },
 }
+
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs();
+
+parser_configs.comment = {
+    install_info = {
+        url = "https://github.com/OXY2DEV/tree-sitter-comment",
+        files = { "src/parser.c" },
+        branch = "main",
+
+        -- Also installs the query files(*syntax highlighting*), Only for the `main` branch of `nvim-treesitter`.
+        queries = "queries/"
+    },
+}

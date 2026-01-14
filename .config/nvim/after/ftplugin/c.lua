@@ -2,14 +2,11 @@ vim.bo.commentstring = "// %s"
 vim.opt.colorcolumn = "101"
 vim.opt.textwidth = 100
 
--- this doesn't work lol
--- trying to make header files have a filetype of c
 
--- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
--- 	-- pattern = { "*.h", "*.c" },
--- 	group = vim.api.nvim_create_augroup("hwuverhiuuw", {}),
--- 	callback = function()
--- 		print("hi")
--- 		-- vim.bo.filetype = "c"
--- 	end
--- })
+-- vim.keymap.set('n', '<leader>hf', [[][%?^\w<CR>"my/{<CR>[]%?^\w<CR>"lyy:LspClangdSwitchSourceHeader<CR>"mp]])
+
+vim.filetype.add({
+	extension = {
+		h = 'c'
+	}
+})
