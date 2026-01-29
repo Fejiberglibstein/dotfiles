@@ -3,6 +3,7 @@
 #
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/aseprite/build/bin:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

@@ -1,16 +1,17 @@
 [font]
-size = 12.0
+size = 11.0
+offset.y = 0
 
 [font.normal]
 # Hurmit Nerd Font
 # 0xProto Nerd Font
 # IosevkaTermSlab Nerd Font
 # JetBrainsMonoNL Nerd Font
-# VictorMono Nerd Font          - this one sucks
 # DaddyTimeMono Nerd Font
 # FantasqueSansM Nerd Font Mono 
 # CaskaydiaCove Nerd Font       - awesome
-family = "CaskaydiaCove Nerd Font       "                       
+# MapleMono
+family = "0xProto Nerd Font Mono"                       
 style = "Regular"
 
 # [font.italic]
@@ -21,11 +22,11 @@ style = "Regular"
 term = "alacritty"
 
 [window]
-opacity = 0.75
+opacity = 1
 
 # Default colors
 [colors.primary]
-background = '#131417' # base
+background = '#15111c' # base
 foreground = '#CAD3F5' # text
 # Bright and dim foreground colors
 dim_foreground = '#CAD3F5' # text
@@ -70,12 +71,12 @@ background = '#F4DBD6' # rosewater
 # Normal colors
 [colors.normal]
 black = '#494D64' # surface1
-red = '#ED8796' # red
-green = '#A6DA95' # green
-yellow = '#EED49F' # yellow
-blue = '#8AADF4' # blue
-magenta = '#F5BDE6' # pink
-cyan = '#8BD5CA' # teal
+red = '#c74a4a' # red
+green = '#588f47' # green
+yellow = '#baa227' # yellow
+blue = '#4656e8' # blue
+magenta = '#8f51db' # pink
+cyan = '#72b8af' # teal
 white = '#B8C0E0' # subtext1
 
 # Bright colors
