@@ -1,7 +1,7 @@
 ---@diagnostic disable: missing-fields
 require('nvim-treesitter').setup()
 
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.config').setup {
     auto_install = true,
     highlight = {
         enable = true,
@@ -10,7 +10,7 @@ require('nvim-treesitter.configs').setup {
     }
 }
 
-require 'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.config'.setup {
     textobjects = {
         select = {
             enable = true,
@@ -61,7 +61,7 @@ require 'nvim-treesitter.configs'.setup {
     },
 }
 
-local parser_configs = require("nvim-treesitter.parsers").get_parser_configs();
+local parser_configs = require("nvim-treesitter.parsers")
 
 parser_configs.comment = {
     install_info = {
