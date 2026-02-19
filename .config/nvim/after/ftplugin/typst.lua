@@ -46,3 +46,9 @@ vim.keymap.set(
 	end,
 	{ buffer = true }
 )
+
+vim.keymap.set(
+	'n',
+	'gs',
+	'mz[s1z=`z'
+)

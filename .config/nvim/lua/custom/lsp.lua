@@ -75,6 +75,7 @@ vim.lsp.config["clangd"] = {
         "--completion-style=bundled",
         "--cross-file-rename",
         "--header-insertion=iwyu",
+        "--compile-commands-dir=" .. vim.loop.cwd()
     },
     init_options = {
         clangdFileStatus = true, -- Provides information about activity on clangd’s per-file worker thread
@@ -102,6 +103,10 @@ vim.lsp.config["pylsp"] = {
             },
         },
     },
+}
+
+vim.lsp.config['pylsp'] = {
+    cmd_env = { VIRTUAL_ENV = vim.fn.finddir(".venv", '.') },
 }
 
 -- require('mason-lspconfig').setup_handlers({
